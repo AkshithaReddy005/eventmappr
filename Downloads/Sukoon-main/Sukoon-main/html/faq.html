@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs - SoulSpace</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/faq.css" />
+  <link rel="icon" href="/images/favicon-enhanced.png">
+  <style>
+    body { background: #0b1220; color: #fff; font-family: 'Montserrat', sans-serif; }
+    .faq-heading { text-align: center; color: #80F7D1; font-family: 'Playfair Display', serif; margin-top: 2rem; margin-bottom: 1rem; font-size: 2.2rem; }
+    .faq-container { max-width: 700px; margin: 0 auto; padding: 2rem 1rem; }
+    .faq-item { background: rgba(24,33,50,0.85); border-radius: 1.1em; margin-bottom: 1.2em; box-shadow: 0 2px 20px rgba(128,247,209,0.11); border: 1.5px solid rgba(128,247,209,0.19); }
+    .faq-question { cursor: pointer; padding: 1.1em 1.5em; font-weight: bold; color: #80F7D1; font-size: 1.1em; border: none; background: none; width: 100%; text-align: left; outline: none; transition: background 0.2s; border-radius: 1.1em 1.1em 0 0; }
+    .faq-question:hover, .faq-item.open .faq-question { background: rgba(128,247,209,0.09); }
+    .faq-answer { padding: 0 1.5em 1.1em 1.5em; color: #d6eaff; font-size: 1em; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s, opacity 0.4s; }
+    .faq-item.open .faq-answer { max-height: 300px; opacity: 1; }
+    @media (max-width: 600px) { .faq-heading { font-size: 1.3rem; } .faq-container { padding: 1rem 0.2rem; } }
+  </style>
+</head>
+<body>
+  <h1 class="faq-heading">Frequently Asked Questions</h1>
+  <div class="faq-container">
+    <div class="faq-item">
+      <button class="faq-question">What is SoulSpace?</button>
+      <div class="faq-answer">SoulSpace is a modern wellness platform offering curated experiences for mindfulness, therapy, and personal growth.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How do I access the wellness features?</button>
+      <div class="faq-answer">Simply scroll down to the "Our Unique Wellness Experiences" section on the homepage and explore the interactive cards.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Are the services free?</button>
+      <div class="faq-answer">Many resources are free, and some premium features may require sign-up for full access.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How can I contact support?</button>
+      <div class="faq-answer">You can email us at <a href="mailto:soulspace.contact@gmail.com" style="color:#80F7D1;">soulspace.contact@gmail.com</a>.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Is SoulSpace suitable for children?</button>
+      <div class="faq-answer">Yes, we offer wholesome content and activities for children and families in the "Little Joys" section.</div>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.parentElement;
+        item.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>

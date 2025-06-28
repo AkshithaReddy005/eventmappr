@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100vw !important;
+      min-width: 100vw !important;
+      background: none !important;
+    }
+    .about-section-dark,
+    .about-section-dark .about-container {
+      margin: 0 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      width: 100vw !important;
+      min-width: 100vw !important;
+      left: 0;
+      right: 0;
+      position: relative;
+      background: none;
+    }
+  </style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoulSpace</title>
+  <link rel="icon" href="/images/favicon-enhanced.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/wellness-carousel.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="/images/favicon-enhanced.png" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="stylesheet" text="text/CSS"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" text="text/CSS"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(13, 50, 64, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .navbar-brand img {
+      height: 35px;
+      width: auto;
+    }
+
+    .brand-text {
+      color: #80F7D1;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: #80F7D1;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .login-button {
+      background: #80F7D1;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 500;
+      color: #00488F;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .login-button:hover {
+      background: #00488F;
+      color: #80F7D1;
+    }
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+    .hamburger svg {
+      width: 24px;
+      height: 24px;
+      color: #80F7D1;
+    }
+    .cancel {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(13, 50, 64, 0.95);
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .login-button {
+        margin-top: 1rem;
+      }
+    }
+    .back-top-wrap {
+      position: fixed;
+      bottom: 5rem;
+      right: 1rem;
+      background-color: #80F7D1;
+      padding: 1rem 1.2rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: .3s ease-in-out;
+      z-index: 100;
+    }
+    .back-top-wrap:hover {
+      background-color: #00a2ff;
+      color: #80F7D1;
+    }
+    .back-top-wrap:hover .fas.fa-arrow-up {
+      color: white;
+    }
+    .fas.fa-arrow-up {
+      color: #00488F;
+      transition: 0.3s ease-in-out;
+    }
+    .welcome-section {
+      text-align: center;
+      margin: 4em 0 2em 0;
+      padding: 2em 1em;
+      background: linear-gradient(120deg, #184e36 0%, #225a43 40%, #27496d 100%);
+      border-radius: 1.5em;
+      box-shadow: 0 6px 48px 0 #80F7D133, 0 1.5px 20px 0 #0003;
+      color: #fff;
+    }
+    .welcome-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6em;
+      letter-spacing: 1px;
+    }
+    .welcome-emoji {
+      font-size: 2rem;
+      vertical-align: middle;
+      margin-right: 0.3em;
+    }
+    .brand-highlight {
+      color: #80F7D1;
+      background: rgba(128,247,209,0.12);
+      padding: 0.1em 0.5em;
+      border-radius: 0.5em;
+    }
+    .welcome-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-top: 0.2em;
+      color: #e9ffe6;
+    }
+    .tagline-quote {
+      font-style: italic;
+      color: #aafad9;
+    }
+    .tagline-extra {
+      display: block;
+      margin-top: 1em;
+      font-size: 1.05rem;
+      color: #baf7d8;
+    }
+    .tagline-icon {
+      font-size: 1.2em;
+      vertical-align: middle;
+      margin: 0 0.2em;
+    }
+    .loading-wrapper {
+      position: fixed;
+      z-index: 99999;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      background: linear-gradient(120deg, #184e36 0%, #225a43 40%, #27496d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.7s cubic-bezier(.6,0,.4,1);
+      opacity: 1;
+    }
+    .loading-wrapper.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .soulspace-loader {
+      background: rgba(24, 33, 50, 0.82);
+      border-radius: 2em;
+      box-shadow: 0 6px 48px 0 #80F7D133, 0 1.5px 20px 0 #0003;
+      border: 1.5px solid rgba(128,247,209,0.19);
+      padding: 2.5em 2.5em 2em 2.5em;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-width: 320px;
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px) saturate(1.2);
+      -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    }
+    .loader-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin-bottom: 1.5em;
+      background: #fff6;
+      box-shadow: 0 2px 28px #80F7D133, 0 1.5px 20px #0003;
+      object-fit: cover;
+    }
+    .loader-spinner {
+      border: 4px solid #80F7D1;
+      border-top: 4px solid #184e36;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: loader-spin 1.2s linear infinite;
+      margin-bottom: 1.5em;
+    }
+    @keyframes loader-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loader-message {
+      color: #fff;
+      margin-bottom: 2em;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      text-align: center;
+      padding: 0.7em 1.4em;
+      min-width: 220px;
+      max-width: 90vw;
+      letter-spacing: 0.5px;
+    }
+    .loader-enter-btn {
+      margin-top: 0.6em;
+      padding: 0.7em 2.2em;
+      border-radius: 2em;
+      border: none;
+      background: linear-gradient(90deg,#80F7D1 0%,#184e36 100%);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.08em;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #80F7D122;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      opacity: 0.7;
+    }
+    .loader-enter-btn:enabled:hover {
+      background: #80F7D1;
+      color: #184e36;
+      opacity: 1;
+      box-shadow: 0 4px 20px #80F7D144;
+    }
+    .custom-cursor {
+      position: fixed;
+      z-index: 99999;
+      top: 0; left: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: rgba(57,255,20,0.13); /* Retro green glow */
+      border: 2.5px solid #39FF14; /* Neon green */
+      box-shadow: 0 0 14px #39FF14, 0 0 38px #39FF1466;
+      transition: transform 0.13s cubic-bezier(.6,0,.4,1), background 0.2s, border 0.2s;
+      transform: translate(-50%, -50%) scale(1);
+      mix-blend-mode: lighten;
+    }
+    .custom-cursor.pointer {
+      background: rgba(57,255,20,0.32);
+      border-color: #39FF14;
+      box-shadow: 0 0 28px #39FF14, 0 0 54px #39FF1488;
+      transform: translate(-50%, -50%) scale(1.18);
+    }
+    .custom-cursor.active {
+      background: #80F7D1;
+      border-color: #184e36;
+      transform: translate(-50%, -50%) scale(1.25);
+    }
+    .hero-parallax {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #184e36 0%, #225a43 40%, #27496d 100%);
+      overflow: hidden;
+    }
+    .hero-bg-anim {
+      position: absolute;
+      width: 120vw; height: 120vh;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 0;
+      opacity: 0.12;
+      pointer-events: none;
+      animation: heroBgMove 12s linear infinite alternate;
+    }
+    @keyframes heroBgMove {
+      0% { filter: blur(0px) hue-rotate(0deg); }
+      100% { filter: blur(8px) hue-rotate(36deg); }
+    }
+    .hero-content {
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: 1.7px;
+      text-shadow: 0 4px 24px #0008, 0 1px 0 #222e3c;
+      animation: heroTitleAnim 1.1s cubic-bezier(.7,0,.4,1);
+    }
+    @keyframes heroTitleAnim {
+      0% { opacity: 0; transform: translateY(40px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .hero-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      color: #80F7D1;
+      margin-top: 0.7em;
+      margin-bottom: 0;
+      text-shadow: 0 2px 8px #0004;
+      animation: heroSubtitleAnim 1.3s cubic-bezier(.7,0,.4,1);
+    }
+    @keyframes heroSubtitleAnim {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .wellness-features-grid-modern {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2vw;
+    }
+    .wellness-feature-card-glass {
+      background: rgba(24, 33, 50, 0.82);
+    }
+  </style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoulSpace</title>
+  <link rel="icon" href="/images/favicon-enhanced.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/wellness-carousel.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="/images/favicon-enhanced.png" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="stylesheet" text="text/CSS"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" text="text/CSS"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+  <div class="loading-wrapper">
+    
+      <img src="data:image/png;base64,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" alt="SoulSpace Logo" class="loader-logo" />
+      <div class="loader-spinner"></div>
+      <div class="loader-message">🌿 Breathe in the calm of nature.<br>Let SoulSpace bring you peace, balance, and renewal. 🌱</div>
+      <button id="enter-btn" class="loader-enter-btn" disabled>Enter</button>
+    
+  </div>
+<style>
+/* --- Loader (Restored Glassmorphic Style) --- */
+.loading-wrapper {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: linear-gradient(120deg, #184e36 0%, #225a43 40%, #27496d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.7s cubic-bezier(.6,0,.4,1);
+  opacity: 1;
+}
+.loading-wrapper.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.soulspace-loader {
+  background: rgba(24, 33, 50, 0.82);
+  border-radius: 2em;
+  box-shadow: 0 6px 48px 0 #80F7D133, 0 1.5px 20px 0 #0003;
+  border: 1.5px solid rgba(128,247,209,0.19);
+  padding: 2.5em 2.5em 2em 2.5em;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 320px;
+  min-height: 330px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+}
+.loader-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 1.5em;
+  background: #fff6;
+  box-shadow: 0 2px 28px #80F7D133, 0 1.5px 20px #0003;
+  object-fit: cover;
+}
+.loader-spinner {
+  border: 4px solid #80F7D1;
+  border-top: 4px solid #184e36;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: loader-spin 1.2s linear infinite;
+  margin-bottom: 1.5em;
+}
+@keyframes loader-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.loader-message {
+  color: #fff;
+  margin-bottom: 2em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  text-align: center;
+ 
+  padding: 0.7em 1.4em;
+
+  min-width: 220px;
+  max-width: 90vw;
+  letter-spacing: 0.5px;
+}
+.loader-enter-btn {
+  margin-top: 0.6em;
+  padding: 0.7em 2.2em;
+  border-radius: 2em;
+  border: none;
+  background: linear-gradient(90deg,#80F7D1 0%,#184e36 100%);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.08em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #80F7D122;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  opacity: 0.7;
+}
+.loader-enter-btn:enabled:hover {
+  background: #80F7D1;
+  color: #184e36;
+  opacity: 1;
+  box-shadow: 0 4px 20px #80F7D144;
+}
+
+/* --- Custom Animated Cursor: Retro Style --- */
+.custom-cursor {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(57,255,20,0.13); /* Retro green glow */
+  border: 2.5px solid #39FF14; /* Neon green */
+  box-shadow: 0 0 14px #39FF14, 0 0 38px #39FF1466;
+  transition: transform 0.13s cubic-bezier(.6,0,.4,1), background 0.2s, border 0.2s;
+  transform: translate(-50%, -50%) scale(1);
+  mix-blend-mode: lighten;
+}
+.custom-cursor.pointer {
+  background: rgba(57,255,20,0.32);
+  border-color: #39FF14;
+  box-shadow: 0 0 28px #39FF14, 0 0 54px #39FF1488;
+  transform: translate(-50%, -50%) scale(1.18);
+}
+
+.custom-cursor.active {
+  background: #80F7D1;
+  border-color: #184e36;
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+/* --- Parallax Hero Section --- */
+.hero-parallax {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #184e36 0%, #225a43 40%, #27496d 100%);
+  overflow: hidden;
+}
+.hero-bg-anim {
+  position: absolute;
+  width: 120vw; height: 120vh;
+  left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  animation: heroBgMove 12s linear infinite alternate;
+}
+@keyframes heroBgMove {
+  0% { filter: blur(0px) hue-rotate(0deg); }
+  100% { filter: blur(8px) hue-rotate(36deg); }
+}
+.hero-content {
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+  text-shadow: 0 4px 24px #0008, 0 1px 0 #222e3c;
+  animation: heroTitleAnim 1.1s cubic-bezier(.7,0,.4,1);
+}
+@keyframes heroTitleAnim {
+  0% { opacity: 0; transform: translateY(40px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hero-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  color: #80F7D1;
+  margin-top: 0.7em;
+  margin-bottom: 0;
+  text-shadow: 0 2px 8px #0004;
+  animation: heroSubtitleAnim 1.3s cubic-bezier(.7,0,.4,1);
+}
+@keyframes heroSubtitleAnim {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Features Grid (with Circular Images) --- */
+.wellness-features-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2vw;
+}
+.wellness-feature-card-glass {
+  background: rgba(24, 33, 50, 0.82);
+  border-radius: 2em;
+  box-shadow: 0 6px 48px 0 #80F7D133, 0 1.5px 20px 0 #0003;
+  border: 1.5px solid rgba(128,247,209,0.19);
+  padding: 2.5em 1.5em 2em 1.5em;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.32s cubic-bezier(.6,.2,.3,1), box-shadow 0.32s, border 0.22s;
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+}
+.wellness-feature-card-glass:hover, .wellness-feature-card-glass:focus {
+  outline: none;
+  box-shadow: 0 0 0 7px #80F7D1, 0 12px 48px #80F7D155, 0 4px 30px #0002;
+  border: 1.5px solid #80F7D1;
+  transform: translateY(-10px) scale(1.045);
+  z-index: 2;
+}
+.feature-icon-glass {
+  width: 92px; height: 92px; border-radius: 50%; background: rgba(128,247,209,0.09); display: flex; align-items: center; justify-content: center; margin-bottom: 1.3em; box-shadow: 0 2px 12px #80F7D122; overflow: hidden;
+}
+.feature-icon-glass img { width: 84px; height: 84px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 0 4px #80F7D1aa; background: #fff; }
+.wellness-feature-card-glass h2 {
+  font-size: 1.45em;
+  margin-bottom: 0.6em;
+  color: #80F7D1;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  z-index: 1;
+  font-weight: 700;
+  text-align: center;
+}
+.wellness-feature-card-glass p {
+  font-size: 1.05em;
+  color: #d6eaff;
+  text-align: center;
+  z-index: 1;
+  margin-bottom: 1.1em;
+}
+.feature-arrow-glass {
+  display: inline-block;
+  font-size: 2em;
+  color: #80F7D1;
+  background: rgba(24,33,50,0.24);
+  border-radius: 50%;
+  padding: 0.2em 0.36em 0.15em 0.36em;
+  margin-top: auto;
+  box-shadow: 0 2px 14px #80F7D122;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.feature-arrow-glass:hover {
+  background: #80F7D1;
+  color: #101828;
+  transform: scale(1.12);
+}
+
+/* --- Animated Menu Icon --- */
+.menu-toggle {
+  display: inline-block;
+  cursor: pointer;
+  z-index: 1001;
+  background: none;
+  border: none;
+  outline: none;
+  margin-left: 1em;
+}
+.menu-toggle .bar {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 6px auto;
+  border-radius: 3px;
+  background: #80F7D1;
+  transition: 0.4s;
+}
+.menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active .bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+.menu-toggle.active .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* --- Glassmorphic Overlay for Modals/Sections --- */
+.glass-overlay {
+  background: rgba(24,33,50,0.55);
+  border-radius: 2em;
+  box-shadow: 0 6px 48px 0 #80F7D133, 0 1.5px 20px 0 #0003;
+  border: 1.5px solid rgba(128,247,209,0.19);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+}
+
+/* --- Section/Page Transitions --- */
+.section-transition {
+  transition: opacity 0.7s cubic-bezier(.6,0,.4,1), transform 0.7s cubic-bezier(.6,0,.4,1);
+  opacity: 1;
+  transform: none;
+}
+.section-transition.hide {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  pointer-events: none;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1100px) {
+  .wellness-features-grid-modern { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .wellness-features-grid-modern { grid-template-columns: 1fr; gap: 1.3rem; }
+  .wellness-header-modern { margin-bottom: 2.2rem; }
+  .wellness-title-modern { font-size: 1.35rem; }
+  .wellness-feature-card-glass { min-height: 220px; padding: 1.2em 0.7em 1em 0.7em; }
+  .hero-title { font-size: 1.5rem; }
+}
+
+
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: linear-gradient(120deg, #184e36 0%, #225a43 40%, #27496d 100%);
+  /* Deep forest green to blue */
+  box-shadow: 0 0 0 100vw rgba(24, 78, 54, 0.15) inset;
+  /* Subtle dark green overlay for depth */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s;
+}
+.soulspace-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loader-logo {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 12px #80F7D1);
+  border-radius: 18px;
+  background: #fff2;
+}
+.loader-spinner {
+  width: 56px;
+  height: 56px;
+  border: 5px solid #80F7D1;
+  border-top: 5px solid #222e3c;
+  border-radius: 50%;
+  animation: loader-spin 1.1s linear infinite;
+}
+@keyframes loader-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<script>
+window.addEventListener('load', function () {
+  const loader = document.querySelector('.loading-wrapper');
+  const enterBtn = document.getElementById('enter-btn');
+  // Enable the button after everything is loaded
+  if(enterBtn) enterBtn.disabled = false;
+
+  function hideLoader() {
+    if(loader) loader.style.opacity = 0;
+    setTimeout(() => { if(loader) loader.style.display = 'none'; }, 700);
+    document.removeEventListener('keydown', onKeyDown);
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'Enter' && !enterBtn.disabled) {
+      hideLoader();
+    }
+  }
+
+  if(enterBtn) enterBtn.addEventListener('click', hideLoader);
+  document.addEventListener('keydown', onKeyDown);
+});
+</script>
+<style>
+.loader-message {
+  margin: 28px 0 0 0;
+  padding: 0 28px;
+  color: #e0eaff;
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.16);
+  line-height: 1.5;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  opacity: 0.94;
+}
+
+.loader-enter-btn {
+  margin-top: 32px;
+  padding: 12px 32px;
+  font-size: 1.2rem;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s, color 0.2s;
+}
+.loader-enter-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.loader-enter-btn:not(:disabled):hover {
+  background: #00488F;
+  color: #fff;
+}
+</style>
+
+  <!-- Back to top button -->
+  <div id="back-top-div" class="back-top-wrap">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  <header>
+    <nav class="nav" id="nav">
+      <div>
+        <a class="navbar-brand" href="index.html">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwuG9cMOV-VmrcDS-9EqfjszA2HowyE1vhoQ&s" alt="SoulSpace Logo" class="logo" />
+          <span class="brand-text">SoulSpace</span>
+        </a>
+      </div>
+     
+      <div class="nav-links" id="navLinks">
+        <ul class="links" id="navmenu">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="#services">SERVICES </a></li>
+          <li><a href="html/faq.html">FAQ</a></li>
+          <li><a href="html/contact.html">CONTACT US </a></li>
+        </ul>
+      </div>
+      <button class="login-button"><a href="html/login.html">SignUp / Login</a></button>
+      <div class="hamburger" id="ham">
+        <i class="cancel fa-solid fa-xmark"></i>
+
+        <svg class="burger" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z">
+          </path>
+        </svg>
+      </div>
+    </nav>
+    <div class="menu" id="menu">
+      <ul class="menu-link">
+        <li><a href="#">HOME</a></li>
+        <li><a href="#services">SERVICES </a></li>
+        <li><a href="html/faq.html">FAQ</a></li>
+        <li><a href="html/contact.html">CONTACT US </a></li>
+      </ul>
+    </div>
+    <section class="hero-section" id="hero-section" data-aos="fade">
+  <div class="hero-overlay-glass"></div>
+      <div class="video-banner-container" aria-label="SoulSpace Video Banner" role="region">
+        <!-- Two video elements will be injected for crossfade -->
+      </div>
+      <div class="hero-overlay">
+  <h1 class="hero-headline" data-aos="fade-up" data-aos-delay="100">
+  <span class="welcome-emoji" aria-hidden="true">🌱</span>
+  Welcome to <span class="brand-highlight">SOULSPACE</span>
+</h1>
+<p class="hero-tagline" data-aos="fade-up" data-aos-delay="300">
+  <span class="tagline-quote">“Your safe space to pause, heal, and feel again.”</span>
+  <br>
+  
+</p>
+  <a href="#services" class="rainbow-button hero-cta" style="z-index:2;position:relative;" data-aos="zoom-in" data-aos-delay="500">Explore Wellness</a>
+  <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="700">
+    <span class="arrow-down"></span>
+  </div>
+        
+      </div>
+    </section>
+    <script src="js/hero-video-cycler.js"></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap');
+      .hero-section {
+        width: 100vw;
+        height: calc(100vh + 350px);
+        min-height: 1100px;
+        max-height: none;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      .background-video-blur {
+  transition: opacity 0.85s;
+}
+.hero-fade-video {
+  position: absolute !important;
+  top: 0; left: 0;
+  width: 100vw !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.85s;
+}
+
+.background-video-blur {
+  transition: opacity 0.9s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: cover;
+  filter: blur(6px) brightness(0.8);
+  z-index: 0;
+}
+      .hero-overlay {
+        background: linear-gradient(180deg, rgba(34,46,60,0.92) 0%, rgba(34,46,60,0.42) 70%, rgba(34,46,60,0.09) 100%);
+        box-shadow: 0 2px 24px #0007;
+        border-radius: 1.5em;
+        padding: 7vh 2vw 4vh 2vw;
+        margin: 0 auto;
+        max-width: 700px;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-overlay .hero-headline {
+        font-family: 'Playfair Display', serif;
+        color: #fff;
+        font-size: 2.8vw;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 1vw;
+        text-align: center;
+        line-height: 1.15;
+        background: none;
+        box-shadow: none;
+      }
+      .hero-overlay .welcome-emoji {
+        font-size: 1.8em;
+        vertical-align: middle;
+        margin-right: 0.2em;
+      }
+      .hero-overlay .brand-highlight {
+        color: #1fe3b6;
+        background: rgba(128, 247, 209, 0.13);
+        border-radius: 0.5em;
+        padding: 0.1em 0.4em;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-shadow: 0 2px 18px #184e36cc, 0 1px 0 #222e3c;
+        box-shadow: 0 2px 18px #80f7d144;
+      }
+      .hero-overlay .hero-tagline {
+        color: #d6eaff;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.4vw;
+        margin-bottom: 2vw;
+        font-weight: 400;
+        text-align: center;
+        line-height: 1.5;
+        margin-top: 0.7vw;
+      }
+      .hero-overlay .tagline-quote {
+        font-size: 1.25em;
+        color: #b8ffe2;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 8px #184e36bb, 0 1px 0 #222e3c;
+      }
+      .hero-overlay .tagline-extra {
+        display: inline-block;
+        margin-top: 0.7em;
+        font-size: 1.1em;
+        color: #d6eaff;
+        background: rgba(34, 78, 54, 0.08);
+        border-radius: 0.8em;
+        padding: 0.25em 0.9em;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        box-shadow: 0 2px 12px #80f7d122;
+      }
+      .hero-overlay .tagline-icon {
+        font-size: 1.2em;
+        margin: 0 0.15em;
+        vertical-align: middle;
+      }
+      @media (max-width: 600px) {
+        .hero-overlay .hero-headline { font-size: 7vw; }
+        .hero-overlay .hero-tagline { font-size: 3.5vw; }
+      }
+      @media (max-width: 600px) {
+        .hero-overlay h1 { font-size: 7vw; }
+        .hero-overlay h2 { font-size: 4vw; }
+        .hero-section { height: 40vh; min-height: 200px; }
+      }
+    </style>
+
+  </header>
+
+<!-- Premium About Section (Sacred Space) -->
+<section id="about" class="about-section" style="background: rgb(13, 50, 64) !important;" data-aos="fade-up">
+  <div class="about-header">
+      <div class="watercolor-stroke"></div>
+      <h2 class="about-heading" style="color:#80F7D1; text-shadow:0 3px 16px #000, 0 1px 0 #222e3c; position:relative; z-index:2; font-size:2.3rem; text-align:center; margin-bottom:0.5rem; letter-spacing:1px;">Find Your <span style="color:#fff; text-shadow:0 3px 16px #80F7D1, 0 1px 0 #222e3c;">Sacred Space</span></h2>
+      <p class="about-subtitle" style="color:#d6eaff; text-shadow:0 2px 8px #000, 0 1px 0 #222e3c; font-size:1.18rem; text-align:center; margin-bottom:2.5rem; font-family:'Montserrat',sans-serif; letter-spacing:0.5px;">Where mindfulness meets modern therapy</p>
+    </div>
+    <div class="about-content-wrapper">
+      <div class="about-visual">
+        <div class="gif-container">
+          <img src="https://i.pinimg.com/originals/81/8d/54/818d547f320e23b996f4585d6efb347a.gif" alt="Meditation animation" class="about-gif">
+          <div class="gif-overlay"></div>
+        </div>
+        <div class="floating-elements">
+          <div class="floating-circle circle-1"></div>
+          <div class="floating-circle circle-2"></div>
+          <div class="floating-dot dot-1"></div>
+          <div class="floating-dot dot-2"></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div>🌌 About SoulSpace<br>
+          SoulSpace is a gentle pause in your busy day —<br>
+          a place where your mind can breathe,<br>
+          your heart can feel,<br>
+          and your soul can rest.<br>
+          <br>
+          Through music, movement, art, and stillness,<br>
+          we help you reconnect with peace —<br>
+          quietly, softly, deeply.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- New About-like Section (User Content, Dark Theme) -->
+<section class="about-section about-section-dark" style="background: rgb(13, 50, 64) !important;" data-aos="fade-up">
+    <div class="about-header">
+      <div class="watercolor-stroke"></div>
+      <h1 class="about-heading">Here, there’s no pressure to fix or change anything.</h1>
+      <p class="about-subtitle">You simply arrive as you are.</p>
+    </div>
+    <div class="about-content-wrapper">
+      <div class="about-text">
+        <div>
+          Whether you’re looking for a moment of peace, a way to release tension, or just a small break from the noise—SoulSpace offers a calm space to choose what feels right for you.<br><br>
+          Everything is designed to support you gently—without judgment, without urgency—so you can reconnect with yourself in your own time, in your own way.
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="gif-container">
+          <img src="https://i.pinimg.com/originals/73/2b/e6/732be6adb2c114e0223c36b96dfd2ad8.gif" alt="Gentle Reflection" class="about-gif" loading="lazy" />
+          <div class="gif-overlay"></div>
+        </div>
+        <div class="floating-elements">
+          <div class="floating-circle circle-1"></div>
+          <div class="floating-circle circle-2"></div>
+          <div class="floating-dot dot-1"></div>
+          <div class="floating-dot dot-2"></div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<style>
+  .about-section-dark {
+    background: rgb(13, 50, 64) !important;
+    color: #fff;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    left: 0;
+    right: 0;
+    position: relative;
+  }
+  .about-section-dark .about-container {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 3rem 2rem !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    left: 0;
+    right: 0;
+    position: relative;
+  }
+  @media (max-width: 900px) {
+    .about-section-dark .about-container {
+      padding: 2rem 1rem !important;
+    }
+  }
+  @media (max-width: 600px) {
+    .about-section-dark .about-container {
+      padding: 1.2rem 0.3rem !important;
+    }
+  }
+  .about-section-dark + .about-section-dark {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .about-section-dark:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .about-section-dark:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .about-section-dark .about-heading {
+    color: #80F7D1;
+    text-shadow: 0 3px 16px #000, 0 1px 0 #222e3c;
+    font-size: 2.3rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+  .about-section-dark .about-subtitle {
+    color: #d6eaff;
+    text-shadow: 0 2px 8px #000, 0 1px 0 #222e3c;
+    font-size: 1.18rem;
+    font-family: 'Montserrat',sans-serif;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.5px;
+  }
+  /* Increased spacing for main about-section text block */
+.about-section-dark .about-text {
+    color: #fff;
+    padding-left: 9rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-radius: 1.2rem;
+    background: rgba(13,50,64,0.85); /* subtle overlay for separation if desired */
+  }
+  @media (max-width: 900px) {
+    .about-section-dark .about-text {
+      padding-left: 2.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+  .about-section-dark .about-gif {
+    background: #1a2633;
+    border: 2px solid #0ff0fc55;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 24px 0 rgba(0,255,255,0.13);
+    width: 300px;
+    height: 300px;
+    max-width: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+  }
+  @media (max-width: 900px) {
+    .about-section-dark .about-gif {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  @media (max-width: 900px) {
+    .about-section-dark .about-container {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
+
+<!-- 🌙 2. A Moment for You -->
+<section class="moment-dark-section" data-aos="fade-up">
+  <div class="moment-flex">
+    <div class="moment-dark-gif moment-big-gif">
+      <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/c9b6a644718867.581b85348d25c.gif" alt="Floating Stars" loading="lazy" />
+    </div>
+    <div class="moment-text-quote">
+      <span class="moment-moon">🌙</span>
+      <h2>A Moment for You</h2>
+      <blockquote class="moment-quote">
+        The world will keep spinning.<br>
+        Right now, you don’t have to.<br>
+        Take a moment —<br>
+        to do nothing but exist.
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+  .moment-dark-section {
+    background: rgb(13, 50, 64);
+    padding: 6rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .moment-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 2.5rem;
+  }
+  .moment-text-quote {
+    flex: 1 1 0;
+    text-align: left;
+    color: #fff;
+    padding-right: 0.5rem;
+  }
+  .moment-moon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .moment-text-quote h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.3rem 0 1.2rem 0;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .moment-quote {
+    border-left: 4px solid #80F7D1;
+    margin: 0;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.22rem;
+    color: #e0f7fa;
+    font-style: italic;
+    background: rgba(19, 38, 53, 0.4);
+    box-shadow: 0 2px 18px 0 rgba(0,255,255,0.07);
+    border-radius: 1rem;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    font-family: 'Playfair Display', serif;
+  }
+  .moment-dark-gif {
+    flex: 0 0 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .moment-dark-gif img {
+    width: 220px;
+    height: 220px;
+    border-radius: 1.5rem;
+    object-fit: cover;
+    box-shadow: 0 2px 24px 0 rgba(0,255,255,0.13);
+    background: #1a2633;
+    border: 2px solid #0ff0fc55;
+  }
+  @media (max-width: 900px) {
+    .moment-dark-gif img {
+      width: 160px;
+      height: 160px;
+    }
+    .moment-dark-gif {
+      flex: 0 0 140px;
+    }
+  }
+  @media (max-width: 800px) {
+    .moment-dark-gif img {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  @media (max-width: 800px) {
+    .moment-flex {
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .moment-text-quote {
+      padding-right: 0;
+      text-align: center;
+    }
+    .moment-dark-gif {
+      justify-content: center;
+    }
+    .moment-quote {
+      padding: 1.2rem 0.7rem;
+      font-size: 1.08rem;
+    }
+  }
+</style>
+
+<style>
+  .moment-dark-section {
+    background: rgb(13, 50, 64);
+    padding: 6rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .moment-dark-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgb(19, 38, 53);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(23, 25, 50, 0.37);
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 3rem;
+    gap: 2.5rem;
+    border: 2px solid #0ff0fc22;
+  }
+  .moment-dark-text {
+    flex: 1 1 0;
+    text-align: left;
+    padding-right: 0.5rem;
+    color: #fff;
+  }
+  .moment-dark-gif {
+    flex: 0 0 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .moment-dark-gif img {
+    width: 220px;
+    height: 220px;
+    border-radius: 1.5rem;
+    object-fit: cover;
+    box-shadow: 0 2px 24px 0 rgba(0,255,255,0.13);
+    background: #1a2633;
+    border: 2px solid #0ff0fc55;
+  }
+  @media (max-width: 900px) {
+    .moment-dark-gif img {
+      width: 160px;
+      height: 160px;
+    }
+    .moment-dark-gif {
+      flex: 0 0 140px;
+    }
+  }
+  @media (max-width: 800px) {
+    .moment-dark-gif img {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  .moment-moon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .moment-dark-text h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.3rem 0 1rem 0;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .moment-dark-text p {
+    font-size: 1.18rem;
+    color: #e0f7fa;
+    margin: 0;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+  }
+  @media (max-width: 800px) {
+    .moment-dark-card {
+      flex-direction: column;
+      padding: 2rem 1rem;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .moment-dark-text {
+      padding-right: 0;
+      text-align: center;
+    }
+    .moment-dark-gif {
+      justify-content: center;
+    }
+  }
+</style>
+
+<style>
+  /* ===== Premium About Section Styles ===== */
+  .about-section {
+    background: rgb(13, 50, 64) !important;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    background: rgb(19, 38, 53) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 3rem 2rem !important;
+  }
+  @media (max-width: 900px) {
+    .about-container {
+      padding: 2rem 1rem !important;
+    }
+  }
+  @media (max-width: 600px) {
+    .about-container {
+      padding: 1.2rem 0.3rem !important;
+    }
+  }
+  /* Header Styles */
+  .about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+  .watercolor-stroke {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 80px;
+   
+    background-size: contain;
+    opacity: 0.7;
+    z-index: -1;
+  }
+  .about-heading {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    font-family: 'Playfair Display', serif;
+  }
+  .about-heading span {
+    color: #4f46e5;
+    position: relative;
+  }
+  .about-heading span::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(79, 70, 229, 0.2);
+    z-index: -1;
+  }
+  .about-subtitle {
+    font-size: 1.2rem;
+    color: #64748b;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  /* Content Layout */
+  .about-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  /* Visual Elements */
+  .about-visual {
+    position: relative;
+    height: 100%;
+  }
+  .gif-container {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: transform 0.5s ease;
+  }
+  .gif-container:hover {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  .gif-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
+    mix-blend-mode: overlay;
+  }
+  .about-gif {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* Floating Elements */
+  .floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  .floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.6;
+  }
+  .circle-1 {
+    width: 200px;
+    height: 200px;
+    background: #a5b4fc;
+    top: -50px;
+    left: -50px;
+    animation: float 8s ease-in-out infinite;
+  }
+  .circle-2 {
+    width: 150px;
+    height: 150px;
+    background: #c7d2fe;
+    bottom: -30px;
+    right: -30px;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+  .floating-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: #4f46e5;
+  }
+  .dot-1 {
+    width: 12px;
+    height: 12px;
+    top: 20%;
+    right: 10%;
+    animation: float 6s ease-in-out infinite;
+  }
+  .dot-2 {
+    width: 8px;
+    height: 8px;
+    bottom: 15%;
+    left: 5%;
+    animation: float 7s ease-in-out infinite reverse;
+  }
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-20px) translateX(10px);
+    }
+  }
+  /* Text Content */
+  .about-text {
+    padding-left: 2rem;
+  }
+  .mission-statement h3 {
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+  }
+  .mission-statement h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #4f46e5;
+  }
+  .mission-statement p {
+    color: #475569;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  /* Principles Grid */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .principle-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .principle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  .principle-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .principle-card h4 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin-bottom: 0.8rem;
+  }
+  .principle-card p {
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .about-content-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .about-text {
+      padding-left: 0;
+      margin-top: 3rem;
+    }
+    .about-heading {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #80F7D1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+      letter-spacing: 1.2px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      text-align: left;
+    }
+    .about-heading::after {
+      content: '';
+      display: block;
+      width: 82px;
+      height: 5px;
+      background: linear-gradient(90deg, #80F7D1 70%, transparent 100%);
+      border-radius: 6px;
+      margin-top: 0.6rem;
+      margin-left: 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .about-section {
+      padding: 4rem 1.5rem;
+    }
+    .about-heading {
+      font-size: 2rem;
+    }
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+  <!-- SERVICES SECTION -->
+  <section id="services" class="wellness-section" data-aos="fade-up">
+  <div class="wellness-header-modern">
+    <h1 class="wellness-title-modern" data-aos="fade-up">Our Unique Wellness Experiences</h1>
+    <p class="wellness-subtitle-modern" data-aos="fade-up" data-aos-delay="100">Curated journeys for your mind, body, and soul</p>
+  </div>
+  <div class="wellness-features-grid-modern">
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="0">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQNwwXtG1Zvf3IY3IMI5vhK5hwSB-TzFvWnai_oApHcoPqAQrSl" alt="MoodTunes" /></div>
+      <h2>MoodTunes</h2>
+      <p>Elevate your mood with handpicked playlists and soundscapes.</p>
+      <a href="html/zentunes.html" class="feature-arrow-glass" aria-label="Explore MoodTunes">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="100">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSlNQDokPnhCPvfbTVMRpvBDXsIy0ht1Em-_nf9TnfSNZAeUWzo" alt="MindFuel Reads" /></div>
+      <h2>MindFuel Reads</h2>
+      <p>Inspiring books and articles to spark growth and positivity.</p>
+      <a href="html/reading.html" class="feature-arrow-glass" aria-label="Explore MindFuel Reads">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="200">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ4q-NyPCrTM_MecUjhVQ_LBApy2oER9y00oaF49pbz6925jxff" alt="ZenMoves" /></div>
+      <h2>ZenMoves</h2>
+      <p>Guided yoga and mindful movement sessions for all levels.</p>
+      <a href="html/zenmoves.html" class="feature-arrow-glass" aria-label="Explore ZenMoves">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="300">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs28U7I7J19JhXh6tpDZU3nNrFVPtWfjKNZ2GoUTatM3-lvZkHtYY4xroSqRZH_VOTNhI&usqp=CAU" alt="JoyBurst Sessions" /></div>
+      <h2>JoyBurst Sessions</h2>
+      <p>Laughter therapy and joy-boosting activities.</p>
+      <a href="joy.html" class="feature-arrow-glass" aria-label="Explore JoyBurst Sessions">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="400">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSzEUqRm8fQVhd4RctXG7SjvWWkTlu4hNWG-nIauvMQ6UA0c28l" alt="HeartTalks" /></div>
+      <h2>HeartTalks</h2>
+      <p>Supportive conversations and uplifting community stories.</p>
+      <a href="html/talkingTherapy.html" class="feature-arrow-glass" aria-label="Explore HeartTalks">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="500">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIv5wFjtb-p14bUn0Y7MU86cdWxfhgTZT8RQ&s" alt="Little Joys" /></div>
+      <h2>Little Joys</h2>
+      <p>Wholesome content and activities for children and families.</p>
+      <a href="html/childTherapy.html" class="feature-arrow-glass" aria-label="Explore Little Joys">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="600">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXXObLhwYmlcQOvM4QZliExxITVQtLmZDifw&s" alt="Rhythm & Flow" /></div>
+      <h2>Rhythm & Flow</h2>
+      <p>Dance and movement to unlock your creative energy.</p>
+      <a href="html/zenmoves.html" class="feature-arrow-glass" aria-label="Explore Rhythm & Flow">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="700">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjnzZ48MzacxOncTJC1vOb1LTG--bd3lUsmA&s" alt="ColorSoul" /></div>
+      <h2>ColorSoul</h2>
+      <p>Art therapy and creative expression for relaxation.</p>
+      <a href="html/nananananana.html" class="feature-arrow-glass" aria-label="Explore ColorSoul">&#8594;</a>
+    </div>
+    <div class="wellness-feature-card-glass" data-aos="fade-up" data-aos-delay="800">
+      <div class="feature-icon-glass"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNkeCr3_g4QIoQLtDCdOXds2Smz7Iwrdy99g&s" alt="PlayMinds" /></div>
+      <h2>PlayMinds</h2>
+      <p>Mindful games and puzzles to stimulate and relax your mind.</p>
+      <a href="html/mindful games.html" class="feature-arrow-glass" aria-label="Explore PlayMinds">&#8594;</a>
+    </div>
+  </div>
+  
+  <style>
+    /* --- Modern Glassmorphic Features Grid Inspired by JFA Awards --- */
+    .wellness-header-modern {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .wellness-title-modern {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.7rem;
+      text-shadow: 0 3px 18px #000a, 0 1px 0 #222e3c;
+    }
+    .wellness-subtitle-modern {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.18rem;
+      color: #80F7D1;
+      letter-spacing: 0.6px;
+      margin-bottom: 0;
+      text-shadow: 0 2px 8px #0004;
+    }
+    .wellness-features-grid-modern {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2vw;
+    }
+    .wellness-feature-card-glass {
+      background: rgba(24, 33, 50, 0.82);
+      border-radius: 2em;
+      box-shadow: 0 6px 48px 0 #80F7D133, 0 1.5px 20px 0 #0003;
+      border: 1.5px solid rgba(128,247,209,0.19);
+      padding: 2.5em 1.5em 2em 1.5em;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 340px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.32s cubic-bezier(.6,.2,.3,1), box-shadow 0.32s, border 0.22s;
+      backdrop-filter: blur(10px) saturate(1.2);
+      -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    }
+    .wellness-feature-card-glass:hover, .wellness-feature-card-glass:focus {
+      outline: none;
+      box-shadow: 0 0 0 7px #80F7D1, 0 12px 48px #80F7D155, 0 4px 30px #0002;
+      border: 1.5px solid #80F7D1;
+      transform: translateY(-10px) scale(1.035);
+      z-index: 2;
+    }
+    .feature-icon-glass {
+      width: 80px; height: 80px; border-radius: 1.2em; background: rgba(128,247,209,0.09); display: flex; align-items: center; justify-content: center; margin-bottom: 1.3em; box-shadow: 0 2px 12px #80F7D122;
+    }
+    .feature-icon-glass img { width: 60px; height: 60px; object-fit: contain; filter: drop-shadow(0 0 8px #80F7D1); }
+    .wellness-feature-card-glass h2 {
+      font-size: 1.45em;
+      margin-bottom: 0.6em;
+      color: #80F7D1;
+      letter-spacing: 1px;
+      font-family: 'Montserrat', sans-serif;
+      z-index: 1;
+      font-weight: 700;
+      text-align: center;
+    }
+    .wellness-feature-card-glass p {
+      font-size: 1.05em;
+      color: #d6eaff;
+      text-align: center;
+      z-index: 1;
+      margin-bottom: 1.1em;
+    }
+    .feature-arrow-glass {
+      display: inline-block;
+      font-size: 2em;
+      color: #80F7D1;
+      background: rgba(24,33,50,0.24);
+      border-radius: 50%;
+      padding: 0.2em 0.36em 0.15em 0.36em;
+      margin-top: auto;
+      box-shadow: 0 2px 14px #80F7D122;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .feature-arrow-glass:hover {
+      background: #80F7D1;
+      color: #101828;
+      transform: scale(1.12);
+    }
+    @media (max-width: 1100px) {
+      .wellness-features-grid-modern { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .wellness-features-grid-modern { grid-template-columns: 1fr; gap: 1.3rem; }
+      .wellness-header-modern { margin-bottom: 2.2rem; }
+      .wellness-title-modern { font-size: 1.35rem; }
+      .wellness-feature-card-glass { min-height: 220px; padding: 1.2em 0.7em 1em 0.7em; }
+    }
+    /* End Modern Glassmorphic Features Grid Styles */
+    
+    @keyframes scrollHintPulse {
+      0% { background: rgba(24,33,50,0.85); color: #80F7D1; }
+      100% { background: rgba(24,33,50,1); color: #fff; }
+    }
+    .wellness-section {
+      background: radial-gradient(circle at 20% 40%, #222e3c 60%, #0b1220 100%);
+      padding: 5rem 0 4rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    .wellness-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      color: #80F7D1;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    .wellness-subtitle {
+      text-align: center;
+      color: #d6eaff;
+      font-size: 1.15rem;
+      margin-bottom: 2.5rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+      transform: translateY(-8px) scale(1.035);
+      box-shadow: 0 12px 48px rgba(128,247,209,0.22), 0 4px 30px rgba(0,0,0,0.22);
+      border: 1.5px solid #80F7D1;
+    }
+    @media (max-width: 900px) {
+      .wellness-experiences-grid-modern {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.3em;
+      }
+      .wellness-section {
+        padding: 3.5rem 0 2.5rem 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .wellness-experiences-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 1em;
+        padding: 0 0.5vw 2vw 0.5vw;
+      }
+      .wellness-card-modern {
+        padding: 1.2em 0.7em 1em 0.7em;
+        min-height: 180px;
+      }
+      .wellness-header h1 {
+        font-size: 1.4rem;
+      }
+      .wellness-subtitle {
+        font-size: 1rem;
+      .faq-answer {
+        font-size: 0.97rem;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        item.querySelector('.faq-question').addEventListener('click', function() {
+          item.classList.toggle('open');
+        });
+      });
+    });
+  </script>
+</section>
+<!-- SoulSpace FAQ Section End -->
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+
+    let preloader = document.querySelector(".loading-wrapper");
+    function myFunction() {
+      preloader.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    let navbar = document.querySelector("#nav");
+    let navmenu = document.querySelector("#navmenu");
+
+    window.onscroll = function () {
+      if (window.pageYOffset >= navmenu.offsetTop) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    };
+
+    window.onscroll = () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('nav-active');
+      } else {
+        navbar.classList.remove('nav-active');
+      }
+    };
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./serviceworker.js')
+          .then((reg) => console.log('Success', reg.scope))
+          .catch((err) => console.log('Error', err))
+      })
+    }
+  </script>
+  <script src="js/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+<script>
+// --- Loader Fade-out & Enter Button Logic (restored) ---
+window.addEventListener('DOMContentLoaded', function() {
+  var loader = document.querySelector('.loading-wrapper');
+  var enterBtn = document.getElementById('enter-btn');
+  // Enable Enter button after a short delay
+  setTimeout(function() {
+    if (enterBtn) enterBtn.disabled = false;
+  }, 1200);
+  
+  // Fade out loader on Enter or after delay
+  if (enterBtn) {
+    enterBtn.addEventListener('click', function() {
+      loader.classList.add('fade-out');
+      setTimeout(function() { loader.style.display = 'none'; }, 800);
+    });
+  }
+  // Optional: auto-fade after page load (if you want)
+  // setTimeout(function() {
+  //   loader.classList.add('fade-out');
+  //   setTimeout(function() { loader.style.display = 'none'; }, 800);
+  // }, 2500);
+});
+// --- Custom Animated Cursor ---
+(function() {
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button, .feature-arrow-glass, .menu-toggle').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+  });
+})();
+// --- Section/Page Transitions ---
+function showSectionWithTransition(section) {
+  section.classList.add('section-transition');
+  section.classList.remove('hide');
+}
+function hideSectionWithTransition(section) {
+  section.classList.add('section-transition');
+  section.classList.add('hide');
+}
+// --- Animated Menu Icon ---
+(function() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  if(menuToggle) {
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      // Optionally: show/hide nav
+    });
+  }
+})();
+// --- Parallax Hero BG ---
+(function() {
+  const heroBg = document.querySelector('.hero-bg-anim');
+  if(heroBg) {
+    window.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
+      heroBg.style.transform = `translate(-50%,-50%) scale(1.05) rotate(${x/2}deg)`;
+    });
+  }
+})();
+</script>
+<!-- SoulSpace FAQ Section Start -->
+<section id="faq-section" class="faq-section-glass" data-aos="fade-up" data-aos-duration="900">
+  <h1 class="faq-heading">Frequently Asked Questions</h1>
+  <div class="faq-container">
+    <div class="faq-item" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+      <button class="faq-question">What is SoulSpace?</button>
+      <div class="faq-answer">SoulSpace is a modern wellness platform offering curated experiences for mindfulness, therapy, and personal growth.</div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+      <button class="faq-question">How do I access the wellness features?</button>
+      <div class="faq-answer">Simply scroll down to the "Our Unique Wellness Experiences" section on the homepage and explore the interactive cards.</div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+      <button class="faq-question">Are the services free?</button>
+      <div class="faq-answer">Many resources are free, and some premium features may require sign-up for full access.</div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
+      <button class="faq-question">How can I contact support?</button>
+      <div class="faq-answer">You can email us at <a href="mailto:soulspace.contact@gmail.com" style="color:#80F7D1;">soulspace.contact@gmail.com</a>.</div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-duration="700" data-aos-delay="400">
+      <button class="faq-question">Is SoulSpace suitable for children?</button>
+      <div class="faq-answer">Yes, we offer wholesome content and activities for children and families in the "Little Joys" section.</div>
+    </div>
+  </div>
+</section>
+<style>
+  .faq-section-glass {
+    background: linear-gradient(120deg, #232946 0%, #181829 100%);
+    padding: 5rem 0 3.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+  }
+  .faq-heading {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    color: #80F7D1;
+    margin-bottom: 2.2rem;
+    letter-spacing: 1px;
+  }
+  .faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    width: 94vw;
+    max-width: 540px;
+  }
+  .faq-item {
+    background: rgba(28,40,62,0.72);
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #80F7D133, 0 1.5px 0 #80F7D120;
+    padding: 0;
+    overflow: hidden;
+    border: 1.5px solid #80F7D1cc;
+    margin-bottom: 0.5em;
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: #80F7D1;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: 600;
+    padding: 20px 26px 20px 26px;
+    text-align: left;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    position: relative;
+  }
+  .faq-answer {
+    display: none;
+    background: rgba(128,247,209,0.10);
+    color: #fff;
+    font-size: 1rem;
+    padding: 16px 26px 22px 26px;
+    border-top: 1px solid #80F7D140;
+    box-sizing: border-box;
+  }
+  .faq-item.open .faq-answer {
+    display: block;
+  }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.parentElement.classList.toggle('open');
+    });
+  });
+});
+</script>
+<!-- SoulSpace FAQ Section End -->
+  <style> background: linear-gradient(120deg, #232946 0%, #181829 100%);
+    padding: 5rem 0 3.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+  }
+  .faq-heading {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    color: #80F7D1;
+    text-shadow: 0 2px 24px #80F7D1bb;
+    margin-bottom: 2.2rem;
+    letter-spacing: 1px;
+  }
+  .faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    width: 94vw;
+    max-width: 540px;
+  }
+  .faq-item {
+    background: rgba(28,40,62,0.72);
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #80F7D133, 0 1.5px 0 #80F7D120;
+    padding: 0;
+    overflow: hidden;
+    border: 1.5px solid #80F7D1cc;
+    transition: box-shadow 0.2s;
+  }
+  .faq-item.active {
+    box-shadow: 0 8px 38px #80F7D1bb, 0 2px 0 #80F7D120;
+    border-color: #80F7D1;
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: #80F7D1;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: 600;
+    padding: 20px 26px 20px 26px;
+    text-align: left;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+  }
+  .faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 30px;
+    font-size: 1.5rem;
+    color: #80F7D1;
+    transition: transform 0.25s cubic-bezier(.7,0,.3,1);
+  }
+  .faq-item.active .faq-question::after {
+    content: '-';
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    display: none;
+    background: rgba(128,247,209,0.10);
+    color: #fff;
+    font-size: 1rem;
+    padding: 0 26px;
+    border-top: 1px solid #80F7D140;
+    box-sizing: border-box;
+  }
+  .faq-item.active .faq-answer {
+    display: block;
+    padding: 16px 26px 22px 26px;
+  }
+  @media (max-width: 600px) {
+    .faq-container { max-width: 98vw; }
+    .faq-heading { font-size: 1.5rem; }
+  }
+</style>
+<script>
+// Simple FAQ: toggle answer below question, multiple can be open
+(function() {
+  const faqSection = document.getElementById('faq-section');
+  if (!faqSection) return;
+  const faqItems = faqSection.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    btn.addEventListener('click', function () {
+      item.classList.toggle('active');
+    });
+  });
+})();
+</script>
+<!-- SoulSpace FAQ Section End -->
+
+<!-- footer start -->
+  <footer data-aos="fade-in" data-aos-duration="1200">
+    <div class="footer-container">
+      <!--logo and info column-->
+      <div class="col">
+        <!--logo insert-->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwuG9cMOV-VmrcDS-9EqfjszA2HowyE1vhoQ&s" alt="logo" class="footlogo" />
+        <div class="footercontent">
+          <h2 class="footerheading">SoulSpace</h2>
+          <p class="footerpara">go stress free with SoulSpace</p>
+        </div>
+      </div>
+
+      <!--ADDRESS COLUMN-->
+
+      <div class="footer-side-col">
+        <div class="col">
+          <h3>
+            ADDRESS
+            <div class="underline"><span></span></div>
+          </h3>
+          <p>Hyderabad, India</p>
+          <p class="email-id"><a href="mailto:soulspace.contact@gmail.com">soulspace.contact@gmail.com</a></p>
+        </div>
+        <!--HOME COLUMN-->
+        <div class="col">
+          <h3>HOME</h3>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li>
+              <a href="https://github.com/Susmita-Dey/Sukoon/blob/main/CODE_OF_CONDUCT.md">Code Of Conduct</a>
+            </li>
+            <li>
+              <a href="https://github.com/Susmita-Dey/Sukoon">Contribute</a>
+            </li>
+            <li>
+              <a href="https://www.buymeacoffee.com/susmitadey">Donate</a>
+            </li>
+          </ul>
+        </div>
+        <!--OUR SERVICES COLUMN-->
+        <div class="col">
+          <h3>
+            SERVICES
+            <div class="underline"><span></span></div>
+          </h3>
+          <ul class="footer-skills-list">
+  <li> MoodTunes</li>
+  <li> MindFuel Reads</li>
+  <li> ZenMoves</li>
+  <li> JoyBurst Sessions</li>
+  <li> HeartTalks</li>
+  <li> Little Joys</li>
+  <li> Rhythm & Flow</li>
+  <li> ColorSoul</li>
+  <li> PlayMinds</li>
+</ul>
+<style>
+.footer-skills-list {
+  color: #fff;
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 1em;
+  list-style: none;
+}
+.footer-skills-list li {
+  color: #80F7D1;
+  margin-bottom: 0.5em;
+  padding-left: 0.2em;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.footer-skills-list li:hover {
+  color: #fff;
+}
+@media (max-width: 730px) {
+  .footer-skills-list {
+    font-size: 0.97em;
+    padding-left: 0.7em;
+  }
+}
+</style>
+        </div>
+        <!--CONTACTS COLUMN-->
+        <div class="col">
+          <h3>
+            CONTACTS
+            <div class="underline"><span></span></div>
+          </h3>
+          <div class="social-menu">
+            <ul>
+              <a href="https://twitter.com/sukoon665" target="_blank">
+                <li id="social-twitter"><i class="fab fa-2x fa-twitter"></i></li>
+              </a>
+              <a href="https://github.com/Susmita-Dey/Sukoon" target="_blank">
+                <li id="social-github"><i class="fab fa-2x fa-github"></i></li>
+              </a>
+              <a href="https://www.linkedin.com/in/sukoon-web-820705238" target="_blank">
+                <li id="social-linkedin"><i class="fab fa-2x fa-linkedin-in"></i></li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+
+    let preloader = document.querySelector(".loading-wrapper");
+    function myFunction() {
+      preloader.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    let navbar = document.querySelector("#nav");
+    let navmenu = document.querySelector("#navmenu");
+
+    window.onscroll = function () {
+      if (window.pageYOffset >= navmenu.offsetTop) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    };
+
+    window.onscroll = () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('nav-active');
+      } else {
+        navbar.classList.remove('nav-active');
+      }
+    };
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./serviceworker.js')
+          .then((reg) => console.log('Success', reg.scope))
+          .catch((err) => console.log('Error', err))
+      })
+    }
+  </script>
+  <script src="js/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+<script>
+// --- Loader Fade-out & Enter Button Logic (restored) ---
+window.addEventListener('DOMContentLoaded', function() {
+  var loader = document.querySelector('.loading-wrapper');
+  var enterBtn = document.getElementById('enter-btn');
+  // Enable Enter button after a short delay
+  setTimeout(function() {
+    if (enterBtn) enterBtn.disabled = false;
+  }, 1200);
+  
+  // Fade out loader on Enter or after delay
+  if (enterBtn) {
+    enterBtn.addEventListener('click', function() {
+      loader.classList.add('fade-out');
+      setTimeout(function() { loader.style.display = 'none'; }, 800);
+    });
+  }
+  // Optional: auto-fade after page load (if you want)
+  // setTimeout(function() {
+  //   loader.classList.add('fade-out');
+  //   setTimeout(function() { loader.style.display = 'none'; }, 800);
+  // }, 2500);
+});
+// --- Custom Animated Cursor ---
+(function() {
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button, .feature-arrow-glass, .menu-toggle').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+  });
+})();
+// --- Section/Page Transitions ---
+function showSectionWithTransition(section) {
+  section.classList.add('section-transition');
+  section.classList.remove('hide');
+}
+function hideSectionWithTransition(section) {
+  section.classList.add('section-transition');
+  section.classList.add('hide');
+}
+// --- Animated Menu Icon ---
+(function() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  if(menuToggle) {
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      // Optionally: show/hide nav
+    });
+  }
+})();
+// --- Parallax Hero BG ---
+(function() {
+  const heroBg = document.querySelector('.hero-bg-anim');
+  if(heroBg) {
+    window.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
+      heroBg.style.transform = `translate(-50%,-50%) scale(1.05) rotate(${x/2}deg)`;
+    });
+  }
+})();
+</script>
+</body>
+
+</html>
+

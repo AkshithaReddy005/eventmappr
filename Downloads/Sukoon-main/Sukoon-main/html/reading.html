@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mindful Reads</title>
+	<link rel="stylesheet" href="styles.css">
+	<style>
+		html {
+  font-size: 1.1rem;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  min-height: 100vh;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(30, 20, 10, 0.95);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffb347;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.nav-links li a:hover {
+  color: #ff6961;
+}
+
+.nav-links li:last-child {
+  margin-right: 4.5rem;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  background: rgba(30, 20, 10, 0.7);
+  margin-top: 0;
+}
+
+.hero-content {
+  background: rgba(0,0,0,0.6);
+  padding: 2.5rem 3rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  color: #ffb347;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.hero-content p {
+  font-size: 1.2srem;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.hero-content .cta-btn {
+  margin-top: 2rem;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .hero-content {
+    padding: 1.5rem 1rem;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  .nav-links {
+    gap: 1rem;
+  }
+  .nav-links li:last-child {
+    margin-right: 0;
+  }
+}
+
+.section-placeholder {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 20, 10, 0.6);
+  margin: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.section-placeholder h2 {
+  color: #ffb347;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.nav-links li a.active {
+  color: #ffb347;
+  font-weight: bold;
+  border-bottom: 2px solid #ffb347;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.article, .quote, .summary {
+  background: rgba(255,255,255,0.08);
+  padding: 1.5rem 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  margin-bottom: 1rem;
+}
+
+.article h3, .summary h3 {
+  color: #ffb347;
+  margin-top: 0;
+}
+
+.article a, .quote a, .summary a {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: #ffb347;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.article a:hover, .quote a:hover, .summary a:hover {
+  color: #ff6961;
+}
+
+.quote blockquote {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  font-style: italic;
+}
+
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem 1.5rem;
+  justify-content: center;
+}
+
+.book-item {
+  flex: 0 1 45%;
+  max-width: 45%;
+  min-width: 320px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.10);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  padding: 1.2rem 1.2rem;
+  margin-bottom: 2.5rem;
+  gap: 0.5rem;
+}
+
+.book-item:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+}
+
+.book-cover {
+  width: 90px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  background: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.quote-of-day {
+  background: rgba(255,255,255,0.13);
+  border-left: 5px solid #ffb347;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 100;
+  background: #ffb347;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  cursor: pointer;
+  opacity: 0.85;
+  transition: background 0.2s, opacity 0.2s;
+  display: none;
+}
+
+#backToTop:hover {
+  background: #ff6961;
+  color: #fff;
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .book-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-content {
+    padding: 0 0.5rem;
+  }
+  .book-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.7rem 0.5rem;
+  }
+  .book-cover {
+    width: 48px;
+    height: 70px;
+  }
+  #backToTop {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+.benefits {
+  margin: 3rem auto 2rem auto;
+  max-width: 1100px;
+  text-align: center;
+  padding: 3rem 1rem 2.5rem 1rem;
+  border-radius: 32px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, rgba(255,179,71,0.18) 0%, rgba(255,105,97,0.10) 100%);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+
+.benefits::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #ffb34755 0%, transparent 80%);
+  z-index: 0;
+}
+
+.benefits::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #ff696155 0%, transparent 80%);
+  z-index: 0;
+}
+
+.benefits h2 {
+  color: #ffb347;
+  font-size: 2.5rem;
+  margin-bottom: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.benefit-list {
+  display: flex;
+  gap: 2.2rem;
+  justify-content: flex-start;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  z-index: 1;
+  position: relative;
+}
+
+.benefit-card {
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(255,179,71,0.10), 0 1.5px 8px rgba(0,0,0,0.10);
+  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 180px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #fff;
+  scroll-snap-align: start;
+  position: relative;
+  border: 2px solid rgba(255,255,255,0.18);
+  margin-bottom: 0.5rem;
+  cursor: grab;
+  z-index: 1;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px) scale(1.06) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(255,179,71,0.18), 0 4px 16px rgba(0,0,0,0.13);
+  background: rgba(255,255,255,0.32);
+}
+
+.benefit-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1.1rem;
+  filter: drop-shadow(0 2px 8px #ffb34788);
+  text-shadow: 0 2px 8px #ffb34744;
+}
+
+.benefit-card p {
+  margin: 0;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 900px) {
+  .benefit-list {
+    gap: 1.2rem;
+  }
+  .benefit-card {
+    min-width: 150px;
+    max-width: 180px;
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .benefit-list {
+    flex-direction: column;
+    align-items: center;
+    overflow-x: visible;
+    gap: 1.2rem;
+    padding-bottom: 0;
+  }
+  .benefit-card {
+    min-width: 0;
+    max-width: 95vw;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.open-library-card {
+  border: 2.5px solid #3cb371;
+  box-shadow: 0 4px 24px #3cb37133, 0 1.5px 8px rgba(0,0,0,0.10);
+  background: rgba(60,179,113,0.13);
+  transition: box-shadow 0.18s, border 0.18s, background 0.18s;
+}
+.open-library-card:hover {
+  box-shadow: 0 8px 32px #3cb37166, 0 4px 16px rgba(0,0,0,0.13);
+  border: 2.5px solid #228b22;
+  background: rgba(60,179,113,0.22);
+}
+.open-library-card .benefit-icon {
+  font-size: 3.1rem;
+  filter: drop-shadow(0 2px 8px #3cb37188);
+  text-shadow: 0 2px 8px #3cb37144;
+}
+.open-library-card a:hover {
+  color: #228b22;
+}
+
+.bibliotherapy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem 2rem 1rem;
+  margin: 2.5rem 0 2rem 0;
+}
+
+.bibliotherapy-card {
+  background: rgba(30, 20, 10, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  max-width: 800px;
+  width: 100%;
+  padding: 2.5rem 2rem 2rem 2rem;
+  color: #fff;
+  text-align: left;
+  position: relative;
+}
+
+.bibliotherapy-card h2 {
+  color: #ffb347;
+  font-size: 2.3rem;
+  font-weight: 900;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #0008;
+}
+
+.bibliotherapy-card h3 {
+  color: #ff6961;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 0.7rem;
+  font-weight: 800;
+  text-shadow: 0 2px 8px #0006;
+}
+
+.bibliotherapy-card p, .bibliotherapy-card li {
+  font-size: 1.15rem;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.7;
+  text-shadow: 0 1px 4px #0006;
+}
+
+.biblio-types {
+  margin: 0 0 1.5rem 0;
+  padding-left: 1.2rem;
+}
+
+.biblio-types li {
+  margin-bottom: 0.7rem;
+  font-size: 1.13rem;
+  line-height: 1.6;
+  padding-left: 0.2rem;
+}
+
+.biblio-books-btn {
+  margin-top: 1.2rem;
+  font-size: 1.08rem;
+  padding: 0.7rem 2rem;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+
+.biblio-books-btn:hover {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+@media (max-width: 700px) {
+  .bibliotherapy-card {
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+  }
+}
+
+.show-timer-btn, .breath-sync-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.show-timer-btn {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  z-index: 1200;
+  background: #fff8;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.show-timer-btn:hover {
+  background: #ffb347;
+  color: #fff;
+  transform: scale(1.08);
+}
+.reading-timer-widget {
+  display: none;
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  z-index: 1300;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px;
+  max-width: 220px;
+  color: #222;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: box-shadow 0.2s;
+}
+.reading-timer-widget.active {
+  display: flex;
+}
+.close-timer-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #fff8;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.close-timer-btn:hover {
+  background: #ff6961;
+  color: #fff;
+  transform: scale(1.1);
+}
+@media (max-width: 700px) {
+  .show-timer-btn {
+    left: 8px;
+    bottom: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+  .reading-timer-widget {
+    left: 8px;
+    bottom: 8px;
+    min-width: 120px;
+    max-width: 90vw;
+    font-size: 0.98rem;
+  }
+}
+
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.8rem 2.2rem;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s, color 0.2s, transform 0.18s, box-shadow 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn:hover, .cta-btn:focus {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.07);
+  box-shadow: 0 6px 24px rgba(255,105,97,0.18), 0 2px 8px rgba(0,0,0,0.13);
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+  color: #ffb347;
+  text-shadow: 0 2px 8px #0006;
+}
+
+.nav-links li a, .footer-links a, .footer-social a {
+  font-size: 1.13rem;
+}
+
+.read-aloud-btn, .louder-btn, .timer-btn, .cta-btn, .biblio-books-btn {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  html {
+    font-size: 1rem;
+  }
+  .bibliotherapy-card {
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+  }
+}
+
+.section-container {
+  background: rgba(30, 20, 10, 0.88);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 2.5rem 2rem 2.5rem 2rem;
+  margin: 2.5rem auto 2.5rem auto;
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+}
+.section-container:nth-of-type(even) {
+  background: rgba(40, 30, 20, 0.93);
+}
+.section-container h2 {
+  font-size: 2.1rem;
+  color: #ffb347;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px #0008;
+}
+.section-container h3 {
+  color: #ff6961;
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.7rem;
+  font-weight: 800;
+  text-shadow: 0 2px 8px #0006;
+}
+@media (max-width: 700px) {
+  .section-container {
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+  }
+}
+
+.challenge-progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.2rem 0 1.2rem 0;
+}
+.progress-bar-bg {
+  width: 180px;
+  height: 18px;
+  background: #fff2;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #ffb34733;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  width: 0%;
+  border-radius: 12px;
+  transition: width 0.5s;
+}
+.challenge-badge {
+  font-size: 2.2rem;
+  margin-left: 1rem;
+  color: #ffb347;
+  filter: drop-shadow(0 2px 8px #ffb34788);
+}
+.challenge-btn {
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  border: none;
+  border-radius: 18px;
+  padding: 0.6rem 1.5rem;
+  font-weight: bold;
+  font-size: 1.08rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.challenge-btn:hover {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+.forum-btn {
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  border: none;
+  border-radius: 18px;
+  padding: 0.6rem 1.5rem;
+  font-weight: bold;
+  font-size: 1.08rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+  display: inline-block;
+  margin-top: 1rem;
+}
+.forum-btn:hover {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+.newsletter-form {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+.newsletter-form input[type="email"] {
+  padding: 0.6rem 1rem;
+  border-radius: 16px;
+  border: none;
+  font-size: 1.08rem;
+  width: 220px;
+  outline: none;
+}
+.newsletter-btn {
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  border: none;
+  border-radius: 18px;
+  padding: 0.6rem 1.5rem;
+  font-weight: bold;
+  font-size: 1.08rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.newsletter-btn:hover {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+.newsletter-msg {
+  margin-top: 1rem;
+  color: #228b22;
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+.share-controls {
+  margin-top: 0.5rem;
+}
+.share-btn {
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  border: none;
+  border-radius: 16px;
+  padding: 0.35rem 1rem;
+  font-weight: bold;
+  font-size: 1.08rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+  margin-right: 0.5rem;
+}
+.share-btn:hover {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.mode-toggle {
+  position: fixed;
+  top: 18px;
+  right: 32px;
+  z-index: 2000;
+  background: #fff8;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+  margin-left: 2.5rem;
+}
+.mode-toggle:hover {
+  background: #ffb347;
+  color: #fff;
+  transform: scale(1.08);
+}
+/* .progress-dashboard, #progressCalendar, .progress-day, .progress-summary, .goal-form, .goal-btn { removed for reading tracker removal } */
+
+.breath-sync-toggle {
+  position: fixed;
+  bottom: 100px;
+  right: 32px;
+  z-index: 2100;
+  background: #fff8;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 2.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.breath-sync-toggle:hover {
+  background: #ffb347;
+  color: #fff;
+  transform: scale(1.08);
+}
+.breath-sync-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30, 20, 10, 0.92);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: fadeIn 0.4s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.breath-guide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.10);
+  border-radius: 32px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+}
+.breath-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb347 60%, #ff6961 100%);
+  margin-bottom: 2rem;
+  animation: breathAnim 7s infinite ease-in-out;
+  box-shadow: 0 0 32px #ffb34755, 0 2px 8px #ff696144;
+}
+@keyframes breathAnim {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.25); }
+  50% { transform: scale(1.5); }
+  70% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+.breath-message {
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.breath-sounds {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.sound-btn {
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  border: none;
+  border-radius: 18px;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  font-size: 1.08rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.sound-btn:hover {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+.close-breath-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #fff8;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.close-breath-btn:hover {
+  background: #ff6961;
+  color: #fff;
+  transform: scale(1.1);
+}
+@media (max-width: 700px) {
+  .breath-guide {
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+    max-width: 95vw;
+  }
+  .breath-circle {
+    width: 80px;
+    height: 80px;
+  }
+  .breath-sync-toggle {
+    right: 8px;
+    bottom: 80px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+}
+
+/* #recommendationList { removed for recommendations section removal } */
+
+.read-aloud-btn, .louder-btn {
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  border: none;
+  border-radius: 18px;
+  padding: 0.5rem 1.4rem;
+  margin-right: 0.7rem;
+  margin-bottom: 0.3rem;
+  font-size: 1.08rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+  outline: none;
+  display: inline-block;
+}
+.read-aloud-btn:hover, .read-aloud-btn:focus,
+.louder-btn:hover, .louder-btn:focus {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+.read-aloud-controls {
+  margin-top: 0.7rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+@media (max-width: 700px) {
+  .mode-toggle {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+
+.book-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.98rem;
+  padding: 0.2rem 0;
+}
+.book-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+}
+.book-author {
+  font-size: 1.05rem;
+  color: #e0e0e0;
+  margin-bottom: 0.1rem;
+}
+.book-explore-btn {
+  width: 180px;
+  display: block;
+  font-size: 1.18rem;
+  font-weight: 700;
+  padding: 0.7rem 0;
+  margin-top: 1.1rem;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ffb347 0%, #ff6961 100%);
+  color: #222;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.18s;
+}
+.book-explore-btn:hover, .book-explore-btn:focus {
+  background: linear-gradient(90deg, #ff6961 0%, #ffb347 100%);
+  color: #fff;
+  transform: scale(1.05);
+}
+.book-info .bookmark-icon {
+  margin-left: 0;
+  margin-bottom: 0.1rem;
+  font-size: 1.1rem;
+}
+
+.article-flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.2rem;
+}
+.article-text {
+  flex: 2;
+}
+.article-side-img {
+  flex: 1;
+  max-width: 220px;
+  min-width: 120px;
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+  background: #222;
+  object-fit: cover;
+  margin-top: 0.5rem;
+}
+@media (max-width: 900px) {
+  .article-flex {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .article-side-img {
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+  }
+} 
+	</style>
+<script>
+	// Smooth scrolling with keyboard support
+		const navLinks = document.querySelectorAll('.nav-links a');
+		navLinks.forEach(link => {
+			link.addEventListener('click', function (e) {
+				const targetId = this.getAttribute('href').slice(1);
+				const targetSection = document.getElementById(targetId);
+				if (targetSection) {
+					e.preventDefault();
+					window.scrollTo({
+						top: targetSection.offsetTop - 60,
+						behavior: 'smooth'
+					});
+				}
+			});
+			link.addEventListener('keydown', function (e) {
+				if (e.key === 'Enter') {
+					e.preventDefault();
+					this.click();
+				}
+			});
+		});
+
+		// Keyboard navigation
+		const mainContent = document.querySelector('main');
+		mainContent.addEventListener('keydown', function (e) {
+			if (e.key === 'Tab') {
+				e.preventDefault();
+				const focusableElements = Array.from(document.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+				const currentIndex = focusableElements.indexOf(document.activeElement);
+				const nextIndex = e.shiftKey ? currentIndex - 1 : currentIndex + 1;
+				focusableElements[nextIndex % focusableElements.length].focus();
+			}
+		});
+
+		// Highlight active nav link on scroll
+		window.addEventListener('scroll', () => {
+			let fromTop = window.scrollY + 70;
+			navLinks.forEach(link => {
+				const section = document.getElementById(link.getAttribute('href').slice(1));
+				if (
+					section &&
+					section.offsetTop <= fromTop &&
+					section.offsetTop + section.offsetHeight > fromTop
+				) {
+					link.classList.add('active');
+				} else {
+					link.classList.remove('active');
+				}
+			});
+		});
+
+		// Hero section animation (handled by CSS, but ensure class is present)
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelector('.hero-content').style.opacity = 1;
+		});
+
+		// Quote of the Day logic
+		const quotes = [
+			'"Life isn\'t about finding yourself. Life is about creating yourself."',
+			'"You can\'t control the wind, but you can adjust your sails."',
+			'"Our greatest glory is not in never falling, but in rising every time we fall."',
+			'"A mistake that makes you humble is better than an achievement that makes you arrogant."',
+			'"Why do we only rest in peace? Why don\'t we live in peace too?"',
+			'"It\'s not the events of our lives that shape us, but our beliefs as to what those events mean."',
+			'"Breath is the power behind all things… I breathe in and know that good things will happen."',
+			'"There are times when we stop, we sit still. We listen and breezes from a whole other world begin to whisper."'
+		];
+		const quoteOfDayElem = document.getElementById('quoteOfDay');
+		if (quoteOfDayElem) {
+			const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+			quoteOfDayElem.textContent = randomQuote;
+		}
+
+		// Back to Top button logic
+		const backToTopBtn = document.getElementById('backToTop');
+		window.addEventListener('scroll', () => {
+			if (window.scrollY > 300) {
+				backToTopBtn.style.display = 'block';
+			} else {
+				backToTopBtn.style.display = 'none';
+			}
+		});
+		backToTopBtn.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+
+		// Drag-to-scroll for benefit-list carousel (desktop only)
+		const benefitList = document.querySelector('.benefit-list');
+		if (benefitList && window.innerWidth > 700) {
+			let isDown = false;
+			let startX;
+			let scrollLeft;
+			benefitList.addEventListener('mousedown', (e) => {
+				isDown = true;
+				benefitList.classList.add('dragging');
+				startX = e.pageX - benefitList.offsetLeft;
+				scrollLeft = benefitList.scrollLeft;
+			});
+			benefitList.addEventListener('mouseleave', () => {
+				isDown = false;
+				benefitList.classList.remove('dragging');
+			});
+			benefitList.addEventListener('mouseup', () => {
+				isDown = false;
+				benefitList.classList.remove('dragging');
+			});
+			benefitList.addEventListener('mousemove', (e) => {
+				if (!isDown) return;
+				e.preventDefault();
+				const x = e.pageX - benefitList.offsetLeft;
+				const walk = (x - startX) * 1.2;
+				benefitList.scrollLeft = scrollLeft - walk;
+			});
+		}
+
+		// Enhanced Reading Timer with streaks and goals
+		let timerInterval = null;
+		let timerSeconds = 0;
+		let timerRunning = false;
+		let sessionComplete = false;
+		let streak = parseInt(localStorage.getItem('readingStreak')) || 0;
+		let goalTime = parseInt(localStorage.getItem('readingGoal')) || 30; // default 30 minutes
+		const timerDisplay = document.getElementById('timerDisplay');
+		const streakDisplay = document.getElementById('streakDisplay');
+		const goalDisplay = document.getElementById('goalDisplay');
+		const startBtn = document.getElementById('startTimerBtn');
+		const pauseBtn = document.getElementById('pauseTimerBtn');
+		const resumeBtn = document.getElementById('resumeTimerBtn');
+		const resetBtn = document.getElementById('resetTimerBtn');
+		const sessionMsg = document.getElementById('sessionCompleteMsg');
+
+		// Update streak display
+		function updateStreakDisplay() {
+			streakDisplay.textContent = `Reading Streak: ${streak} days`;
+		}
+
+		// Update goal display
+		function updateGoalDisplay() {
+			goalDisplay.textContent = `Daily Goal: ${goalTime} minutes`;
+		}
+
+		// Check streak and update
+		function checkStreak() {
+			const today = new Date().toISOString().split('T')[0];
+			const lastRead = localStorage.getItem('lastReadDate');
+
+			if (!lastRead || new Date(lastRead).toISOString().split('T')[0] !== today) {
+				streak++;
+				localStorage.setItem('readingStreak', streak);
+				localStorage.setItem('lastReadDate', today);
+				updateStreakDisplay();
+			}
+		}
+
+		// Best time record
+		let bestTime = parseInt(localStorage.getItem('bestReadingTime')) || 0;
+		const bestTimeDisplay = document.createElement('div');
+		bestTimeDisplay.className = 'best-time-display';
+		function formatTime(sec) {
+			const min = String(Math.floor(sec / 60)).padStart(2, '0');
+			const s = String(sec % 60).padStart(2, '0');
+			return `${min}:${s}`;
+		}
+		function updateBestTimeDisplay() {
+			bestTimeDisplay.textContent = `Best Time: ${formatTime(bestTime)}`;
+			if (timerDisplay && timerDisplay.parentNode && !document.querySelector('.best-time-display')) {
+				timerDisplay.parentNode.insertBefore(bestTimeDisplay, timerDisplay.nextSibling);
+			}
+		}
+		updateBestTimeDisplay();
+
+		function updateTimerDisplay() {
+			timerDisplay.textContent = formatTime(timerSeconds);
+		}
+
+		function startTimer() {
+			if (timerRunning) return;
+
+			// Check if user has set a goal
+			const goalTimeSeconds = goalTime * 60;
+
+			timerRunning = true;
+			sessionComplete = false;
+			sessionMsg.textContent = '';
+
+			// Show loading animation
+			timerDisplay.classList.add('loading');
+
+			// Update UI
+			startBtn.style.display = 'none';
+			pauseBtn.style.display = 'inline-block';
+			resumeBtn.style.display = 'none';
+			resetBtn.style.display = 'inline-block';
+
+			timerInterval = setInterval(() => {
+				timerSeconds++;
+				updateTimerDisplay();
+
+				// Check goal completion
+				if (timerSeconds >= goalTimeSeconds) {
+					sessionComplete = true;
+					handleSessionComplete();
+					// Update streak
+					checkStreak();
+				}
+
+				// Update reading speed if text is selected
+				const selectedText = window.getSelection().toString();
+				if (selectedText.trim()) {
+					const words = selectedText.trim().split(/\s+/).length;
+					const readingSpeed = calculateReadingSpeed(words, timerSeconds);
+					document.getElementById('readingSpeed').textContent = `Reading Speed: ${readingSpeed} WPM`;
+				}
+			}, 1000);
+		}
+
+		function pauseTimer() {
+			if (!timerRunning) return;
+			timerRunning = false;
+			clearInterval(timerInterval);
+			pauseBtn.style.display = 'none';
+			resumeBtn.style.display = 'inline-block';
+		}
+
+		function resumeTimer() {
+			if (timerRunning) return;
+			timerRunning = true;
+			pauseBtn.style.display = 'inline-block';
+			resumeBtn.style.display = 'none';
+			timerInterval = setInterval(() => {
+				timerSeconds++;
+				updateTimerDisplay();
+				if (timerSeconds >= 600 && !sessionComplete) {
+					sessionComplete = true;
+					handleSessionComplete();
+				}
+			}, 1000);
+		}
+
+		function resetTimer() {
+			timerRunning = false;
+			clearInterval(timerInterval);
+			timerSeconds = 0;
+			updateTimerDisplay();
+			startBtn.style.display = 'inline-block';
+			pauseBtn.style.display = 'none';
+			resumeBtn.style.display = 'none';
+			resetBtn.style.display = 'none';
+			sessionMsg.textContent = '';
+		}
+
+		function handleSessionComplete() {
+			let appreciation = '';
+			if (timerSeconds > bestTime) {
+				bestTime = timerSeconds;
+				localStorage.setItem('bestReadingTime', bestTime);
+				updateBestTimeDisplay();
+				appreciation = `🎉 New Record! You read for ${formatTime(timerSeconds)}. Amazing!`;
+			} else if (timerSeconds >= 600) {
+				appreciation = `👏 Great job! You read for ${formatTime(timerSeconds)}. Keep going!`;
+			} else {
+				appreciation = `Session Complete! You read for ${formatTime(timerSeconds)}.`;
+			}
+			sessionMsg.textContent = appreciation;
+		}
+
+		startBtn.onclick = startTimer;
+		pauseBtn.onclick = pauseTimer;
+		resumeBtn.onclick = resumeTimer;
+		resetBtn.onclick = resetTimer;
+
+		updateTimerDisplay();
+		updateBestTimeDisplay();
+
+		// Read Aloud Logic
+		let synth = window.speechSynthesis;
+		let utterance = null;
+		let currentVolume = 1.0;
+
+		function readAloud(elementId) {
+			if (synth.speaking) synth.cancel();
+			const text = document.getElementById(elementId).textContent;
+			utterance = new SpeechSynthesisUtterance(text);
+			utterance.volume = currentVolume;
+			synth.speak(utterance);
+		}
+
+		function increaseVolume() {
+			if (utterance) {
+				currentVolume = Math.min(1.0, currentVolume + 0.2);
+				utterance.volume = currentVolume;
+				// If already speaking, restart with new volume
+				if (synth.speaking) {
+					synth.cancel();
+					synth.speak(utterance);
+				}
+			} else {
+				currentVolume = Math.min(1.0, currentVolume + 0.2);
+			}
+		}
+
+		// Reading Challenge Logic
+		let challengeProgress = parseInt(localStorage.getItem('challengeProgress')) || 0;
+		const challengeProgressBar = document.getElementById('challengeProgressBar');
+		const challengeProgressText = document.getElementById('challengeProgressText');
+		const challengeBadge = document.getElementById('challengeBadge');
+		function updateChallengeDisplay() {
+			const percent = Math.min(100, (challengeProgress / 4) * 100);
+			if (challengeProgressBar) challengeProgressBar.style.width = percent + '%';
+			if (challengeProgressText) challengeProgressText.textContent = `${challengeProgress}/4 completed`;
+			if (challengeBadge) challengeBadge.style.display = challengeProgress >= 4 ? 'inline-block' : 'none';
+		}
+		function markChallengeProgress() {
+			if (challengeProgress < 4) {
+				challengeProgress++;
+				localStorage.setItem('challengeProgress', challengeProgress);
+				updateChallengeDisplay();
+			}
+		}
+		updateChallengeDisplay();
+
+		// Newsletter Signup Logic
+		function subscribeNewsletter(e) {
+			e.preventDefault();
+			const email = document.getElementById('newsletterEmail').value;
+			const msg = document.getElementById('newsletterMsg');
+			if (email) {
+				msg.textContent = 'Thank you for subscribing! You will receive our next newsletter.';
+				document.getElementById('newsletterForm').reset();
+			}
+		}
+
+		// Social Sharing Logic
+		function shareContent(title, text) {
+			if (navigator.share) {
+				navigator.share({ title, text, url: window.location.href });
+			} else {
+				// Fallback: copy to clipboard
+				const dummy = document.createElement('textarea');
+				dummy.value = `${title}\n${text}\n${window.location.href}`;
+				document.body.appendChild(dummy);
+				dummy.select();
+				document.execCommand('copy');
+				document.body.removeChild(dummy);
+				alert('Content copied to clipboard! Share it anywhere.');
+			}
+		}
+
+		// Dark/Light Mode Toggle
+		const modeToggle = document.getElementById('modeToggle');
+		function setMode(mode) {
+			if (mode === 'light') {
+				document.body.classList.add('light-mode');
+				modeToggle.textContent = '🌞';
+				localStorage.setItem('siteMode', 'light');
+			} else {
+				document.body.classList.remove('light-mode');
+				modeToggle.textContent = '🌙';
+				localStorage.setItem('siteMode', 'dark');
+			}
+		}
+		modeToggle.onclick = () => {
+			const isLight = document.body.classList.contains('light-mode');
+			setMode(isLight ? 'dark' : 'light');
+		};
+		if (localStorage.getItem('siteMode') === 'light') setMode('light');
+		else setMode('dark');
+
+		// Enhanced Bookmarking System with categories
+		let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+		const bookmarkCategories = {
+			'articles': 'Articles',
+			'quotes': 'Quotes',
+			'books': 'Books',
+			'summaries': 'Summaries'
+		};
+
+		// Track reading progress
+		function trackReadingProgress(articleId) {
+			const article = document.getElementById(articleId);
+			if (article) {
+				const rect = article.getBoundingClientRect();
+				const progress = (rect.top + window.scrollY) / (article.scrollHeight - window.innerHeight);
+				storeReadingProgress(articleId, progress * 100);
+			}
+		}
+
+		// Auto-save reading progress
+		window.addEventListener('scroll', () => {
+			const articles = document.querySelectorAll('article');
+			articles.forEach(article => {
+				if (article.id) trackReadingProgress(article.id);
+			});
+		});
+
+		// Continue reading functionality
+		function continueReading(articleId) {
+			const progress = getReadingProgress(articleId);
+			if (progress && progress.lastReadPosition) {
+				const article = document.getElementById(articleId);
+				if (article) {
+					article.scrollTop = progress.lastReadPosition;
+				}
+			}
+		}
+		function toggleBookmark(type, label) {
+			const key = `${type}:${label}`;
+			const idx = bookmarks.indexOf(key);
+			if (idx === -1) {
+				bookmarks.push(key);
+			} else {
+				bookmarks.splice(idx, 1);
+			}
+			localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+			updateBookmarkIcons();
+			updateBookmarksSection();
+		}
+		function updateBookmarkIcons() {
+			document.querySelectorAll('.bookmark-icon').forEach(icon => {
+				const label = icon.getAttribute('onclick').match(/'([^']+)'\)$/)[1];
+				const type = icon.getAttribute('onclick').match(/'([^']+)'/)[1];
+				const key = `${type}:${label}`;
+				if (bookmarks.includes(key)) {
+					icon.classList.add('active');
+					icon.title = 'Remove Bookmark';
+				} else {
+					icon.classList.remove('active');
+					icon.title = 'Bookmark';
+				}
+			});
+		}
+		function updateBookmarksSection() {
+			const list = document.getElementById('bookmarkList');
+			if (!list) return;
+			if (bookmarks.length === 0) {
+				list.textContent = 'No bookmarks yet. Click the bookmark icon on any article, quote, or book to save it here!';
+				return;
+			}
+			list.innerHTML = '';
+			bookmarks.forEach(key => {
+				const [type, label] = key.split(':');
+				const el = document.createElement('div');
+				el.className = 'bookmark-item';
+				el.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${label}`;
+				list.appendChild(el);
+			});
+		}
+		updateBookmarkIcons();
+		updateBookmarksSection();
+
+		// Breath-Sync Mode Logic
+		const breathSyncToggle = document.getElementById('breathSyncToggle');
+		const breathSyncOverlay = document.getElementById('breathSyncOverlay');
+		const closeBreathBtn = document.getElementById('closeBreathBtn');
+		const rainSoundBtn = document.getElementById('rainSoundBtn');
+		const oceanSoundBtn = document.getElementById('oceanSoundBtn');
+		const stopSoundBtn = document.getElementById('stopSoundBtn');
+		let breathSound = null;
+
+		function showBreathSync() {
+			breathSyncOverlay.style.display = 'flex';
+		}
+		function hideBreathSync() {
+			breathSyncOverlay.style.display = 'none';
+			stopBreathSound();
+		}
+		breathSyncToggle.onclick = showBreathSync;
+		closeBreathBtn.onclick = hideBreathSync;
+
+		function playBreathSound(url) {
+			stopBreathSound();
+			breathSound = new Audio(url);
+			breathSound.loop = true;
+			breathSound.volume = 0.5;
+			breathSound.play();
+		}
+		function stopBreathSound() {
+			if (breathSound) {
+				breathSound.pause();
+				breathSound.currentTime = 0;
+				breathSound = null;
+			}
+		}
+		rainSoundBtn.onclick = () => playBreathSound('https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae3c7.mp3');
+		oceanSoundBtn.onclick = () => playBreathSound('https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3');
+		stopSoundBtn.onclick = stopBreathSound;
+
+		// Timer Widget Show/Hide Logic
+		const showTimerBtn = document.getElementById('showTimerBtn');
+		const readingTimerWidget = document.getElementById('reading-timer-widget');
+		const closeTimerBtn = document.getElementById('closeTimerBtn');
+		showTimerBtn.onclick = () => {
+			readingTimerWidget.style.display = 'flex';
+			showTimerBtn.style.display = 'none';
+		};
+		closeTimerBtn.onclick = () => {
+			readingTimerWidget.style.display = 'none';
+			showTimerBtn.style.display = 'block';
+		}; 
+		//
+		// Utility functions
+			/**
+			 * @typedef {Object} ReadingProgress
+			 * @property {string} articleId - Unique identifier for the article
+			 * @property {number} lastReadPosition - Last position in pixels
+			 * @property {number} lastReadTime - Timestamp of last read
+			 */
+
+			/**
+			 * @typedef {Object} Bookmark
+			 * @property {string} type - Type of content (article, quote, book)
+			 * @property {string} label - Content label
+			 * @property {string} category - Category of bookmark
+			 * @property {number} timestamp - Timestamp of creation
+			 */
+
+			/**
+			 * Get random number between min and max
+			 * @param {number} min - Minimum value
+			 * @param {number} max - Maximum value
+			 * @returns {number}
+			 */
+			export function getRandomNumber(min, max) {
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+			/**
+			 * Format time in minutes and seconds
+			 * @param {number} seconds - Time in seconds
+			 * @returns {string}
+			 */
+			export function formatTime(seconds) {
+				const minutes = Math.floor(seconds / 60);
+				const remainingSeconds = seconds % 60;
+				return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+			}
+
+			/**
+			 * Calculate reading speed in WPM
+			 * @param {number} words - Number of words read
+			 * @param {number} time - Time in seconds
+			 * @returns {number}
+			 */
+			export function calculateReadingSpeed(words, time) {
+				return Math.round((words / time) * 60);
+			}
+
+			/**
+			 * Store reading progress
+			 * @param {string} articleId - Article identifier
+			 * @param {number} position - Scroll position
+			 */
+			export function storeReadingProgress(articleId, position) {
+				let progress = JSON.parse(localStorage.getItem('readingProgress') || '{}');
+				progress[articleId] = {
+					lastReadPosition: position,
+					lastReadTime: Date.now()
+				};
+				localStorage.setItem('readingProgress', JSON.stringify(progress));
+			}
+
+			/**
+			 * Get reading progress
+			 * @param {string} articleId - Article identifier
+			 * @returns {ReadingProgress|null}
+			 */
+			export function getReadingProgress(articleId) {
+				const progress = JSON.parse(localStorage.getItem('readingProgress') || '{}');
+				return progress[articleId] || null;
+			}
+
+			/**
+			 * Add bookmark with category
+			 * @param {string} type - Content type
+			 * @param {string} label - Content label
+			 * @param {string} category - Bookmark category
+			 */
+			export function addBookmark(type, label, category) {
+				let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+				bookmarks.push({
+					type,
+					label,
+					category,
+					timestamp: Date.now()
+				});
+				localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+			}
+
+			/**
+			 * Get bookmarks by category
+			 * @param {string} category - Bookmark category
+			 * @returns {Bookmark[]}
+			 */
+			export function getBookmarksByCategory(category) {
+				const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+				return bookmarks.filter(b => b.category === category);
+			}
+
+			/**
+			 * Generate color contrast
+			 * @param {string} color - Hex color
+			 * @returns {string}
+			 */
+			export function generateContrastColor(color) {
+				const hex = color.replace('#', '');
+				const r = parseInt(hex.substring(0, 2), 16);
+				const g = parseInt(hex.substring(2, 4), 16);
+				const b = parseInt(hex.substring(4, 6), 16);
+				const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+				return yiq >= 128 ? '#000000' : '#ffffff';
+			}
+
+</script>
+</head>
+
+<body>
+	<header>
+		<nav class="navbar">
+			<div class="logo">SoulSpace</div>
+			<ul class="nav-links">
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="#articles">Articles</a></li>
+				<li><a href="#quotes">Quotes</a></li>
+				<li><a href="#summaries">Summaries</a></li>
+				<li><a href="#books">Books</a></li>
+			</ul>
+			<button id="modeToggle" class="mode-toggle" aria-label="Toggle dark/light mode">🌙</button>
+		</nav>
+	</header>
+	<main role="main" tabindex="0">
+		<section class="hero" id="home">
+			<div class="hero-content">
+				<h1>Welcome to Our MindFuel Reads</h1>
+				<p class="hero-subtitle">Read articles, motivational quotes, and book summaries to find happiness,
+					knowledge, and stress relief. Let books be your therapy.</p>
+				<a href="#articles" class="cta-btn" aria-label="Start Exploring">Start Exploring</a>
+			</div>
+		</section>
+		<section class="benefits" id="benefits">
+			<h2>Benefits of Reading</h2>
+			<div class="benefit-list">
+				<div class="benefit-card">
+					<span class="benefit-icon" aria-label="Reduces stress">🧘‍♂️</span>
+					<p>Reduces stress</p>
+				</div>
+				<div class="benefit-card">
+					<span class="benefit-icon" aria-label="Increases empathy">🤝</span>
+					<p>Increases empathy</p>
+				</div>
+				<div class="benefit-card">
+					<span class="benefit-icon" aria-label="Prevents cognitive decline">🧠</span>
+					<p>Prevents cognitive decline</p>
+				</div>
+				<div class="benefit-card">
+					<span class="benefit-icon" aria-label="Builds vocabulary">📚</span>
+					<p>Builds vocabulary</p>
+				</div>
+				<div class="benefit-card">
+					<span class="benefit-icon" aria-label="Better sleep">😴</span>
+					<p>Better sleep</p>
+				</div>
+				<div class="benefit-card">
+					<span class="benefit-icon" aria-label="Alleviates depression">🌤️</span>
+					<p>Alleviates depression</p>
+				</div>
+
+			</div>
+		</section>
+		<section class="bibliotherapy" id="bibliotherapy">
+			<div class="bibliotherapy-card">
+				<h2>Understanding Bibliotherapy</h2>
+				<p>The concept of reading as a way to help facilitate the healing process and meet therapeutic goals is
+					a common strategy in many treatment approaches. So what separates bibliotherapy from other
+					established theories of psychotherapy such as cognitive behavioral therapy (CBT)?</p>
+				<p>What makes bibliotherapy different is the fact that a therapist will typically view bibliotherapy as
+					a therapeutic approach, and therefore, use it as an adjunct part of the treatment process; that
+					means that your therapist might use other forms of therapy (like CBT or psychoanalysis) along with
+					bibliotherapy.</p>
+				<p>Since bibliotherapy is often used to support other forms of therapy, it is appropriate for both
+					individual and group settings and for people of all ages. It's common to see a therapist use stories
+					when working with a younger client such as a child or adolescent.</p>
+				<p>When used in a group therapy setting, bibliotherapy allows participants to give and receive feedback
+					about their interpretations of the literature and how it relates to their issues. It also helps
+					improve communication and encourages more in-depth conversations and connections for participants.
+				</p>
+				<h3>Types of Bibliotherapy</h3>
+				<ul class="biblio-types">
+					<li><strong>Creative bibliotherapy:</strong> Group setting, with stories, poems, and fiction read
+						and discussed by the group.</li>
+					<li><strong>Developmental bibliotherapy:</strong> Used in educational settings and by parents to
+						explain childhood and adolescent issues like puberty or bullying.</li>
+					<li><strong>Prescriptive bibliotherapy:</strong> Uses self-help books in clinical or home settings
+						to help modify thought patterns, feelings, and actions.</li>
+					<li><strong>Therapeutic bibliography:</strong> Used in combination with other types of therapy to
+						manage psychological issues.</li>
+				</ul>
+				<button class="cta-btn biblio-books-btn"
+					onclick="document.getElementById('books').scrollIntoView({behavior: 'smooth'});">Best Self-Help
+					Books</button>
+			</div>
+		</section>
+		<section id="articles" class="section-placeholder">
+			<div class="section-content">
+				<h2>Articles</h2>
+				<div class="article">
+					<h3>The Power of Small Habits</h3>
+					<span class="bookmark-icon" onclick="toggleBookmark('article','The Power of Small Habits')"
+						title="Bookmark">��</span>
+					<div class="article-flex">
+						<div class="article-text">
+							<p id="article1Text">Discover how making tiny changes in your daily routine can lead to
+								remarkable results over time. Small habits, when compounded, can transform your life.
+							</p>
+							<div class="read-aloud-controls">
+								<button class="read-aloud-btn" onclick="readAloud('article1Text')">Read Aloud</button>
+								<button class="louder-btn" onclick="increaseVolume()">Louder</button>
+							</div>
+							<div class="share-controls">
+								<button class="share-btn"
+									onclick="shareContent('The Power of Small Habits', 'Discover how making tiny changes in your daily routine can lead to remarkable results over time. Small habits, when compounded, can transform your life.')">Share</button>
+							</div>
+							<a href="https://jamesclear.com/atomic-habits" target="_blank" rel="noopener">Explore
+								More</a>
+						</div>
+						<img src="https://miro.medium.com/v2/resize:fit:1200/1*zcOrxpxC4xsKNNUTtIQHwQ.png"
+							alt="Astronaut walking illustration" class="article-side-img" />
+					</div>
+				</div>
+				<div class="article">
+					<h3>Finding Peace in a Busy World</h3>
+					<span class="bookmark-icon" onclick="toggleBookmark('article','Finding Peace in a Busy World')"
+						title="Bookmark">��</span>
+					<div class="article-flex">
+						<div class="article-text">
+							<p id="article2Text">Learn practical ways to find moments of calm and mindfulness, even when
+								life feels overwhelming and fast-paced.</p>
+							<div class="read-aloud-controls">
+								<button class="read-aloud-btn" onclick="readAloud('article2Text')">Read Aloud</button>
+								<button class="louder-btn" onclick="increaseVolume()">Louder</button>
+							</div>
+							<div class="share-controls">
+								<button class="share-btn"
+									onclick="shareContent('Finding Peace in a Busy World', 'Learn practical ways to find moments of calm and mindfulness, even when life feels overwhelming and fast-paced.')">Share</button>
+							</div>
+							<a href="https://www.mindful.org/meditation/mindfulness-getting-started/" target="_blank"
+								rel="noopener">Explore More</a>
+						</div>
+						<img src="https://miro.medium.com/v2/resize:fit:1080/1*tnE1gsitzxfDciahwpo0yA.png"
+							alt="Meditation illustration" class="article-side-img" />
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="quotes" class="section-placeholder">
+			<div class="section-content">
+				<h2>Quotes</h2>
+				<div class="quote-of-day">
+					<h3>Quote of the Day</h3>
+					<blockquote id="quoteOfDay"></blockquote>
+				</div>
+				<div class="quote">
+					<blockquote>"Life isn't about finding yourself. Life is about creating yourself."</blockquote>
+					<span class="bookmark-icon"
+						onclick="toggleBookmark('quote','Life isn\'t about finding yourself. Life is about creating yourself.')"
+						title="Bookmark">🔖</span>
+					<a href="https://www.brainyquote.com/quotes/george_bernard_shaw_121885" target="_blank"
+						rel="noopener">Explore More</a>
+					<div class="share-controls">
+						<button class="share-btn"
+							onclick="shareContent('Inspirational Quote', 'Life isn\'t about finding yourself. Life is about creating yourself.')">Share</button>
+					</div>
+				</div>
+				<div class="quote">
+					<blockquote>"You can't control the wind, but you can adjust your sails."</blockquote>
+					<span class="bookmark-icon"
+						onclick="toggleBookmark('quote','You can\'t control the wind, but you can adjust your sails.')"
+						title="Bookmark">🔖</span>
+					<a href="https://www.goodreads.com/quotes/10113-you-can-t-control-the-wind-but-you-can-adjust-your"
+						target="_blank" rel="noopener">Explore More</a>
+					<div class="share-controls">
+						<button class="share-btn"
+							onclick="shareContent('Inspirational Quote', 'You can\'t control the wind, but you can adjust your sails.')">Share</button>
+					</div>
+				</div>
+				<div class="quote">
+					<blockquote>"Our greatest glory is not in never falling, but in rising every time we fall."
+					</blockquote>
+					<span class="bookmark-icon"
+						onclick="toggleBookmark('quote','Our greatest glory is not in never falling, but in rising every time we fall.')"
+						title="Bookmark">🔖</span>
+					<a href="https://www.brainyquote.com/quotes/confucius_121635" target="_blank" rel="noopener">Explore
+						More</a>
+					<div class="share-controls">
+						<button class="share-btn"
+							onclick="shareContent('Inspirational Quote', 'Our greatest glory is not in never falling, but in rising every time we fall.')">Share</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="summaries" class="section-placeholder">
+			<div class="section-content">
+				<h2>Summaries</h2>
+				<div class="summary">
+					<h3>Atomic Habits</h3>
+					<p id="summary1Text">A practical guide to building good habits and breaking bad ones, written by
+						James Clear. Learn how small changes can make a big difference.</p>
+					<div class="read-aloud-controls">
+						<button class="read-aloud-btn" onclick="readAloud('summary1Text')">Read Aloud</button>
+						<button class="share-btn"
+							onclick="shareContent('Atomic Habits', 'A practical guide to building good habits and breaking bad ones, written by James Clear. Learn how small changes can make a big difference.')">Share</button>
+					</div>
+					<a href="https://www.goodreads.com/book/show/40121378-atomic-habits" target="_blank"
+						rel="noopener">Explore More</a>
+				</div>
+				<div class="summary">
+					<h3>Ikigai</h3>
+					<p id="summary2Text">Discover the Japanese secret to a long and happy life. This book explores the
+						concept of finding purpose and meaning in everyday living.</p>
+					<div class="read-aloud-controls">
+						<button class="read-aloud-btn" onclick="readAloud('summary2Text')">Read Aloud</button>
+						<button class="share-btn"
+							onclick="shareContent('Ikigai', 'Discover the Japanese secret to a long and happy life. This book explores the concept of finding purpose and meaning in everyday living.')">Share</button>
+					</div>
+					<a href="https://www.goodreads.com/book/show/36208659-ikigai" target="_blank" rel="noopener">Explore
+						More</a>
+				</div>
+			</div>
+		</section>
+		<section id="books" class="section-placeholder">
+			<div class="section-content">
+				<h2>Books</h2>
+				<ul class="book-list">
+					<li class="book-item">
+						<img src="https://jamesclear.com/wp-content/uploads/2019/08/atomicHC-flat-PREFER.jpg"
+							alt="Atomic Habits cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">Atomic Habits</strong>
+							<div class="book-author">by James Clear</div>
+							<span class="bookmark-icon" onclick="toggleBookmark('book','Atomic Habits')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/40121378-atomic-habits', '_blank')">Explore</button>
+						</div>
+					</li>
+					<li class="book-item">
+						<img src="https://hotmart.s3.amazonaws.com/product_pictures/443290ba-937c-4b1c-8140-07538fe6165d/ThePsychologyofMoneyPDF.png"
+							alt="The Psychology of Money cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">The Psychology of Money</strong>
+							<div class="book-author">by Morgan Housel</div>
+							<span class="bookmark-icon" onclick="toggleBookmark('book','The Psychology of Money')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/23692271-the-psychology-of-money', '_blank')">Explore</button>
+						</div>
+					</li>
+					<li class="book-item">
+						<img src="data:image/png;base64,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"
+							alt="The Subtle Art of Not Giving a F*ck cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">The Subtle Art of Not Giving a F*ck</strong>
+							<div class="book-author">by Mark Manson</div>
+							<span class="bookmark-icon"
+								onclick="toggleBookmark('book','The Subtle Art of Not Giving a F*ck')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/30257963-the-subtle-art-of-not-giving-a-f-ck', '_blank')">Explore</button>
+						</div>
+					</li>
+					<li class="book-item">
+						<img src="data:image/jpeg;base64,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"
+							alt="Ikigai cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">Ikigai</strong>
+							<div class="book-author">by Héctor García and Francesc Miralles</div>
+							<span class="bookmark-icon" onclick="toggleBookmark('book','Ikigai')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/36208659-ikigai', '_blank')">Explore</button>
+						</div>
+					</li>
+					<li class="book-item">
+						<img src="https://th.bing.com/th/id/OIP.4Vyq3-mVNxXGaum9jVTOcwHaGw?w=204&h=187&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+							alt="Think Like A Monk cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">Think Like A Monk</strong>
+							<div class="book-author">by Jay Shetty</div>
+							<span class="bookmark-icon" onclick="toggleBookmark('book','Think Like A Monk')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/48855.Think_Like_a_Monk', '_blank')">Explore</button>
+						</div>
+					</li>
+					<li class="book-item">
+						<img src="https://th.bing.com/th/id/OIP.1aBNgjxG2TWB4INV3hxmmgHaLY?w=201&h=309&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+							alt="How To Talk To Anyone cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">How To Talk To Anyone</strong>
+							<div class="book-author">by Leil Lowndes</div>
+							<span class="bookmark-icon" onclick="toggleBookmark('book','How To Talk To Anyone')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/56465.How_to_Talk_to_Anyone', '_blank')">Explore</button>
+						</div>
+					</li>
+					<li class="book-item">
+						<img src="https://th.bing.com/th/id/OIP.y7TaSAImGKo-sidgu2Sm-wHaHa?w=180&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+							alt="Rich Dad Poor Dad cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">Rich Dad Poor Dad</strong>
+							<div class="book-author">by Robert T. Kiyosaki</div>
+							<span class="bookmark-icon" onclick="toggleBookmark('book','Rich Dad Poor Dad')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/69571.Rich_Dad_Poor_Dad', '_blank')">Explore</button>
+						</div>
+					</li>
+					<li class="book-item">
+						<img src="https://daveschoenbeck.com/wp-content/uploads/2020/08/B2B6606E-36C6-4A13-BB43-A022E0AFC4D4.jpeg.webp"
+							alt="Rework cover" class="book-cover">
+						<div class="book-info">
+							<strong class="book-title">Rework</strong>
+							<div class="book-author">by David Heinemeier Hansson</div>
+							<span class="bookmark-icon" onclick="toggleBookmark('book','Rework')"
+								title="Bookmark">🔖</span>
+							<button class="cta-btn book-explore-btn"
+								onclick="window.open('https://www.goodreads.com/book/show/6732019-rework', '_blank')">Explore</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<button id="showTimerBtn" class="show-timer-btn" aria-label="Show Reading Timer">⏱️</button>
+		<div id="reading-timer-widget" class="reading-timer-widget" aria-label="Reading Timer" style="display:none;">
+			<div class="timer-display" id="timerDisplay">00:00</div>
+			<div class="best-time-display" id="bestTimeDisplay">Best Time: 00:00</div>
+			<div class="timer-controls">
+				<button id="startTimerBtn" class="timer-btn">Start</button>
+				<button id="pauseTimerBtn" class="timer-btn" style="display:none;">Pause</button>
+				<button id="resumeTimerBtn" class="timer-btn" style="display:none;">Resume</button>
+				<button id="resetTimerBtn" class="timer-btn" style="display:none;">Reset</button>
+			</div>
+			<div id="sessionCompleteMsg" class="session-complete-msg"></div>
+			<button id="closeTimerBtn" class="close-timer-btn" aria-label="Close Timer">✖</button>
+		</div>
+		<button id="backToTop" title="Back to Top">↑</button>
+		<section class="section-container" id="reading-challenge">
+			<h2>Monthly Reading Challenge</h2>
+			<p>Read 3 articles and 1 book summary this month to earn your badge!</p>
+			<div class="challenge-progress">
+				<div class="progress-bar-bg">
+					<div class="progress-bar-fill" id="challengeProgressBar"></div>
+				</div>
+				<span id="challengeProgressText">0/4 completed</span>
+				<span id="challengeBadge" class="challenge-badge" style="display:none;">🏅</span>
+			</div>
+			<button class="challenge-btn" onclick="markChallengeProgress()">Mark as Read</button>
+		</section>
+		<section class="section-container" id="community-forum">
+			<h2>Community Forum</h2>
+			<p>Discuss books, share your experiences, and connect with fellow readers!</p>
+			<a href="#" class="forum-btn" target="_blank">Join the Discussion</a>
+		</section>
+		<section class="section-container" id="newsletter">
+			<h2>Weekly Newsletter</h2>
+			<p>Get curated articles, quotes, and book recommendations in your inbox every week.</p>
+			<form id="newsletterForm" class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+				<input type="email" id="newsletterEmail" placeholder="Your email address" required />
+				<button type="submit" class="newsletter-btn">Subscribe</button>
+			</form>
+			<div id="newsletterMsg" class="newsletter-msg"></div>
+		</section>
+		<section class="section-container" id="bookmarks">
+			<h2>My Bookmarks</h2>
+			<div id="bookmarkList">No bookmarks yet. Click the bookmark icon on any article, quote, or book to save it
+				here!</div>
+		</section>
+		<button id="breathSyncToggle" class="breath-sync-toggle" aria-label="Toggle Breath-Sync Mode">🧘‍♂️</button>
+		<div id="breathSyncOverlay" class="breath-sync-overlay" style="display:none;">
+			<div class="breath-guide">
+				<div class="breath-circle" id="breathCircle"></div>
+				<div class="breath-message">Breathe in as the circle expands, breathe out as it contracts. Sync your
+					breath with your reading pace for mindful relaxation.</div>
+				<div class="breath-sounds">
+					<button class="sound-btn" id="rainSoundBtn" aria-label="Play Rain Sound">🌧️ Rain</button>
+					<button class="sound-btn" id="oceanSoundBtn" aria-label="Play Ocean Sound">🌊 Ocean</button>
+					<button class="sound-btn" id="stopSoundBtn" aria-label="Stop Sound">⏹️ Stop</button>
+				</div>
+				<button class="close-breath-btn" id="closeBreathBtn" aria-label="Close Breath-Sync Mode">✖</button>
+			</div>
+		</div>
+	</main>
+	<footer class="footer">
+		<div class="footer-content">
+			<div class="footer-logo">MindFuel Reads</div>
+			<div class="footer-links">
+				<a href="#home">Home</a>
+				<a href="#articles">Articles</a>
+				<a href="#quotes">Quotes</a>
+				<a href="#summaries">Summaries</a>
+				<a href="#books">Books</a>
+			</div>
+		</div>
+	</footer>
+	<script src="script.js"></script>
+	<script>
+    // Scroll-based animations
+    const observerOptions = {
+        threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Apply animations to all relevant sections
+    document.querySelectorAll('.article, .quote, .summary, .book-item, .quote-of-day').forEach((el) => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+
+    // Apply animations to section headers
+    document.querySelectorAll('.section-placeholder h2').forEach((el) => {
+        el.classList.add('slide-up');
+        observer.observe(el);
+    });
+
+    // Apply animations to book covers
+    document.querySelectorAll('.book-cover').forEach((el) => {
+        el.classList.add('zoom-in');
+        observer.observe(el);
+    });
+</script>
+</body>
+</html>

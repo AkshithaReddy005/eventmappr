@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPaint Studio - Digital Art Creation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        /* Background Video */
+        .hero-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.8;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.9; }
+            25% { opacity: 0.7; }
+            50% { opacity: 0.8; }
+            75% { opacity: 0.6; }
+        }
+
+        /* Floating Elements */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 40%;
+            right: 30%;
+            animation-delay: 15s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(30px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section.visible::before {
+            opacity: 1;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #f59e0b, #10b981, #ef4444);
+            border-radius: 24px;
+            z-index: -1;
+            animation: borderRotate 3s linear infinite;
+            filter: blur(2px);
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg) translate(0, 0); }
+            50% { transform: rotate(180deg) translate(2px, 2px); }
+            100% { transform: rotate(360deg) translate(0, 0); }
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        @keyframes textGlow {
+            0% { 
+                text-shadow: 
+                  0 0 10px rgba(255,255,255,0.3),
+                  0 0 20px rgba(100,100,255,0.2);
+            }
+            100% { 
+                text-shadow: 
+                  0 0 20px rgba(255,255,255,0.6),
+                  0 0 30px rgba(100,100,255,0.4);
+            }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        .cta-button span {
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover span {
+            transform: translateX(5px);
+        }
+
+        /* Canvas Sections */
+        .canvas-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.95);
+            animation: fadeInScale 1s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .canvas-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--success));
+            animation: gradientSlide 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .toolbar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .toolbar label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-weight: 500;
+        }
+
+        .toolbar input[type="range"] {
+            width: 120px;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .toolbar input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .toolbar input[type="color"] {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background: none;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .toolbar button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toolbar button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Canvas */
+        canvas {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            cursor: crosshair;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 100%;
+            height: auto;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        canvas::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 18px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        canvas:hover {
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            transform: scale(1.02);
+            border-color: var(--primary);
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            transform: scale(0.95);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1) translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item figcaption {
+            padding: 1rem;
+            text-align: center;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+        }
+
+        /* SVG Coloring */
+        .coloring-container {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.2);
+            border-color: white;
+        }
+
+        .color-swatch.selected {
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        #coloring-svg {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Saved Works */
+        .saved-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 2rem;
+        }
+
+        .saved-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .saved-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .saved-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .saved-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .saved-actions button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .saved-actions button:hover {
+            transform: scale(1.2);
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            z-index: 1001;
+            transition: width 0.1s ease;
+            transform: translateX(-100%);
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .paint-splash {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            animation: splash 1.5s ease-in-out infinite;
+        }
+
+        @keyframes splash {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .canvas-section {
+                padding: 2rem 1rem;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .coloring-container {
+                flex-direction: column;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="paint-splash"></div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Background Video -->
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="https://videos.pexels.com/video-files/3273834/3273834-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+
+    <!-- Floating Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <div class="logo">myPaint Studio</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#paint" class="nav-link">Paint</a></li>
+                <li><a href="#mandala" class="nav-link">Mandala</a></li>
+                <li><a href="#coloring" class="nav-link">Coloring</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#saved" class="nav-link">Saved</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="section hero">
+            <div class="hero-content">
+                <h1>Digital Art Studio</h1>
+                <p>Unleash your creativity with our professional digital painting tools. Create stunning artworks, intricate mandalas, and beautiful coloring pages with cutting-edge technology.</p>
+                <a href="#paint" class="cta-button">Start Creating</a>
+            </div>
+        </section>
+
+        <!-- Paint Section -->
+        <section id="paint" class="section">
+            <div class="canvas-section">
+                <h2 class="section-title">Digital Painting</h2>
+                <div class="toolbar" id="paint-toolbar">
+                    <label>
+                        <span>Brush Size</span>
+                        <input type="range" id="brush-size" min="2" max="40" value="8">
+                    </label>
+                    <input type="color" id="brush-color" value="#6366f1">
+                    <button id="clear-canvas">Clear</button>
+                    <button id="save-canvas">Save</button>
+                </div>
+                <canvas id="paint-canvas" width="800" height="500"></canvas>
+            </div>
+        </section>
+
+        <!-- Mandala Section -->
+        <section id="mandala" class="section">
+            <div class="canvas-section">
+                <h2 class="section-title">Mandala Creator</h2>
+                <div class="toolbar" id="mandala-toolbar">
+                    <label>
+                        <span>Symmetry</span>
+                        <input type="number" id="mandala-symmetry" min="2" max="24" value="8" style="width: 60px; padding: 0.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white;">
+                    </label>
+                    <input type="color" id="mandala-color" value="#8b5cf6">
+                    <button id="mandala-clear">Clear</button>
+                    <button id="mandala-save">Save</button>
+                </div>
+                <canvas id="mandala-canvas" width="800" height="500"></canvas>
+            </div>
+        </section>
+
+        <!-- Coloring Section -->
+        <section id="coloring" class="section">
+            <div class="canvas-section">
+                <h2 class="section-title">Interactive Coloring</h2>
+                <div class="coloring-container">
+                    <div class="color-palette" id="color-palette"></div>
+                    <div>
+                        <svg id="coloring-svg" viewBox="0 0 300 200" width="400" height="300">
+                            <!-- Default SVG will be loaded by JS -->
+                        </svg>
+                        <div class="toolbar">
+                            <button id="coloring-eraser">Eraser</button>
+                            <button id="coloring-reset">Reset</button>
+                            <button id="coloring-download">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="canvas-section">
+                <h2 class="section-title">Art Gallery</h2>
+                <div class="gallery">
+                    <figure class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=300&fit=crop" alt="Abstract Art">
+                        <figcaption>Abstract</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Digital Art">
+                        <figcaption>Digital</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&h=300&fit=crop" alt="Mandala Art">
+                        <figcaption>Mandala</figcaption>
+                    </figure>
+                    <figure class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop" alt="Portrait Art">
+                        <figcaption>Portrait</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Saved Works Section -->
+        <section id="saved" class="section">
+            <div class="canvas-section">
+                <h2 class="section-title">Saved Works</h2>
+                <div class="saved-gallery" id="saved-gallery">
+                    <!-- Saved works will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('.nav-link, .cta-button').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Particle System
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        let isDark = false;
+
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            document.body.style.filter = isDark ? 'invert(1) hue-rotate(180deg)' : 'none';
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        });
+
+        // Paint Canvas
+        const paintCanvas = document.getElementById('paint-canvas');
+        const paintCtx = paintCanvas.getContext('2d');
+        let isPainting = false;
+        let brushSize = 8;
+        let brushColor = '#6366f1';
+
+        function startPainting(e) {
+            isPainting = true;
+            paint(e);
+        }
+
+        function stopPainting() {
+            isPainting = false;
+            paintCtx.beginPath();
+        }
+
+        function paint(e) {
+            if (!isPainting) return;
+            
+            const rect = paintCanvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+            
+            paintCtx.lineWidth = brushSize;
+            paintCtx.lineCap = 'round';
+            paintCtx.strokeStyle = brushColor;
+            paintCtx.lineTo(x, y);
+            paintCtx.stroke();
+            paintCtx.beginPath();
+            paintCtx.moveTo(x, y);
+        }
+
+        paintCanvas.addEventListener('mousedown', startPainting);
+        paintCanvas.addEventListener('mouseup', stopPainting);
+        paintCanvas.addEventListener('mousemove', paint);
+        paintCanvas.addEventListener('touchstart', startPainting);
+        paintCanvas.addEventListener('touchend', stopPainting);
+        paintCanvas.addEventListener('touchmove', paint);
+
+        document.getElementById('brush-size').addEventListener('input', (e) => {
+            brushSize = e.target.value;
+        });
+
+        document.getElementById('brush-color').addEventListener('input', (e) => {
+            brushColor = e.target.value;
+        });
+
+        document.getElementById('clear-canvas').addEventListener('click', () => {
+            paintCtx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+        });
+
+        document.getElementById('save-canvas').addEventListener('click', () => {
+            const dataURL = paintCanvas.toDataURL('image/png');
+            saveWork('paint', dataURL);
+            downloadImage(dataURL, 'painting.png');
+        });
+
+        // Mandala Canvas
+        const mandalaCanvas = document.getElementById('mandala-canvas');
+        const mandalaCtx = mandalaCanvas.getContext('2d');
+        let isDrawingMandala = false;
+        let symmetry = 8;
+        let mandalaColor = '#8b5cf6';
+        let lastPos = null;
+
+        function getMandalaPos(e) {
+            const rect = mandalaCanvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left - mandalaCanvas.width/2;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top - mandalaCanvas.height/2;
+            return { x, y };
+        }
+
+        function startMandala(e) {
+            isDrawingMandala = true;
+            lastPos = getMandalaPos(e);
+            drawMandala(e);
+        }
+
+        function stopMandala() {
+            isDrawingMandala = false;
+            lastPos = null;
+            mandalaCtx.beginPath();
+        }
+
+        function drawMandala(e) {
+            if (!isDrawingMandala) return;
+            
+            const pos = getMandalaPos(e);
+            
+            for (let i = 0; i < symmetry; i++) {
+                mandalaCtx.save();
+                mandalaCtx.translate(mandalaCanvas.width/2, mandalaCanvas.height/2);
+                mandalaCtx.rotate((2 * Math.PI * i) / symmetry);
+                mandalaCtx.strokeStyle = mandalaColor;
+                mandalaCtx.lineWidth = 3;
+                mandalaCtx.lineCap = 'round';
+                mandalaCtx.beginPath();
+                mandalaCtx.moveTo(lastPos.x, lastPos.y);
+                mandalaCtx.lineTo(pos.x, pos.y);
+                mandalaCtx.stroke();
+                mandalaCtx.restore();
+            }
+            lastPos = pos;
+        }
+
+        mandalaCanvas.addEventListener('mousedown', startMandala);
+        mandalaCanvas.addEventListener('mouseup', stopMandala);
+        mandalaCanvas.addEventListener('mousemove', drawMandala);
+        mandalaCanvas.addEventListener('touchstart', startMandala);
+        mandalaCanvas.addEventListener('touchend', stopMandala);
+        mandalaCanvas.addEventListener('touchmove', drawMandala);
+
+        document.getElementById('mandala-symmetry').addEventListener('input', (e) => {
+            symmetry = Math.max(2, Math.min(24, parseInt(e.target.value)));
+        });
+
+        document.getElementById('mandala-color').addEventListener('input', (e) => {
+            mandalaColor = e.target.value;
+        });
+
+        document.getElementById('mandala-clear').addEventListener('click', () => {
+            mandalaCtx.clearRect(0, 0, mandalaCanvas.width, mandalaCanvas.height);
+        });
+
+        document.getElementById('mandala-save').addEventListener('click', () => {
+            const dataURL = mandalaCanvas.toDataURL('image/png');
+            saveWork('mandala', dataURL);
+            downloadImage(dataURL, 'mandala.png');
+        });
+
+        // Coloring Section
+        const coloringSvg = document.getElementById('coloring-svg');
+        const colorPalette = document.getElementById('color-palette');
+        let selectedColor = '#6366f1';
+
+        const colors = [
+            '#6366f1', '#8b5cf6', '#f59e0b', '#10b981', '#ef4444', '#06b6d4',
+            '#84cc16', '#f97316', '#ec4899', '#8b5cf6', '#14b8a6', '#f59e0b',
+            '#334155', '#64748b', '#dc2626', '#059669', '#7c3aed', '#2563eb'
+        ];
+
+        // Create color palette
+        colors.forEach(color => {
+            const swatch = document.createElement('div');
+            swatch.className = 'color-swatch';
+            swatch.style.backgroundColor = color;
+            swatch.addEventListener('click', () => {
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                swatch.classList.add('selected');
+                selectedColor = color;
+            });
+            colorPalette.appendChild(swatch);
+        });
+
+        // Set first color as selected
+        colorPalette.firstChild.classList.add('selected');
+
+        // Load default SVG
+        const defaultSvg = `
+            <rect x="50" y="50" width="200" height="100" rx="20" stroke="#334155" stroke-width="3" fill="white"/>
+            <circle cx="100" cy="100" r="30" stroke="#334155" stroke-width="3" fill="white"/>
+            <circle cx="200" cy="100" r="30" stroke="#334155" stroke-width="3" fill="white"/>
+            <path d="M80 130 Q150 160 220 130" stroke="#334155" stroke-width="3" fill="none"/>
+        `;
+        coloringSvg.innerHTML = defaultSvg;
+
+        // Add click events to SVG elements
+        function setupColoringEvents() {
+            coloringSvg.querySelectorAll('rect, circle, ellipse, polygon, path').forEach(element => {
+                element.style.cursor = 'pointer';
+                element.addEventListener('click', () => {
+                    element.setAttribute('fill', selectedColor);
+                });
+            });
+        }
+
+        setupColoringEvents();
+
+        document.getElementById('coloring-eraser').addEventListener('click', () => {
+            selectedColor = 'white';
+        });
+
+        document.getElementById('coloring-reset').addEventListener('click', () => {
+            coloringSvg.querySelectorAll('rect, circle, ellipse, polygon, path').forEach(element => {
+                element.setAttribute('fill', 'white');
+            });
+        });
+
+        document.getElementById('coloring-download').addEventListener('click', () => {
+            const svgData = new XMLSerializer().serializeToString(coloringSvg);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                downloadImage(canvas.toDataURL('image/png'), 'coloring.png');
+            };
+            
+            img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+        });
+
+        // Utility Functions
+        function saveWork(type, dataURL) {
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            works.push({ type, dataURL, date: Date.now() });
+            localStorage.setItem('mypaint-works', JSON.stringify(works));
+            loadSavedWorks();
+        }
+
+        function downloadImage(dataURL, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = dataURL;
+            link.click();
+        }
+
+        function loadSavedWorks() {
+            const gallery = document.getElementById('saved-gallery');
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            
+            gallery.innerHTML = '';
+            
+            if (works.length === 0) {
+                gallery.innerHTML = '<p style="text-align: center; color: white; opacity: 0.7;">No saved works yet. Create something amazing!</p>';
+                return;
+            }
+            
+            works.slice().reverse().forEach((work, index) => {
+                const item = document.createElement('div');
+                item.className = 'saved-item';
+                
+                item.innerHTML = `
+                    <img src="${work.dataURL}" alt="${work.type} artwork">
+                    <div class="saved-actions">
+                        <button onclick="downloadSavedWork(${works.length - 1 - index})" title="Download">⬇️</button>
+                        <button onclick="deleteSavedWork(${works.length - 1 - index})" title="Delete">🗑️</button>
+                    </div>
+                `;
+                
+                gallery.appendChild(item);
+            });
+        }
+
+        function downloadSavedWork(index) {
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            const work = works[index];
+            downloadImage(work.dataURL, `${work.type}-${work.date}.png`);
+        }
+
+        function deleteSavedWork(index) {
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            works.splice(index, 1);
+            localStorage.setItem('mypaint-works', JSON.stringify(works));
+            loadSavedWorks();
+        }
+
+        // Load saved works on page load
+        loadSavedWorks();
+
+        // Prevent touch scrolling on canvas
+        document.addEventListener('touchstart', (e) => {
+            if (e.target.tagName === 'CANVAS') {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            if (e.target.tagName === 'CANVAS') {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            if (e.target.tagName === 'CANVAS') {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>

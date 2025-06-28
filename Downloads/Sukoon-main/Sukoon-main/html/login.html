@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .image-side {
+            flex: 1;
+            background-image: url('https://innerspacetherapy.in/wp-content/uploads/2022/09/Meditation_practice_01_03-1024x819.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .image-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-text {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            color: white;
+            z-index: 1;
+        }
+        
+        .image-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+        
+        .form-container {
+            width: 70%;
+            max-width: 400px;
+        }
+        
+        .form-toggle {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        
+        .form-toggle button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #6c757d;
+            border-bottom: 3px solid #dee2e6;
+        }
+        
+        .form-toggle button.active {
+            color: #495057;
+            border-bottom: 3px solid #0d6efd;
+        }
+        
+        .form {
+            display: none;
+        }
+        
+        .form.active {
+            display: block;
+        }
+        
+        .form h2 {
+            margin-bottom: 1.5rem;
+            color: #212529;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #0b5ed7;
+        }
+        
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 0.5rem;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .image-side {
+                height: 200px;
+            }
+            
+            .image-text {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .image-text h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="image-side">
+        <div class="image-text">
+            <h1>Find Your Peace</h1>
+            <p>Join our community today</p>
+        </div>
+    </div>
+    
+    <div class="form-side">
+        <div class="form-container">
+            <div class="form-toggle">
+                <button class="active" onclick="showForm('login')">Login</button>
+                <button onclick="showForm('signup')">Sign Up</button>
+            </div>
+            
+            <form id="login-form" class="form active">
+                <h2>Welcome Back</h2>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            
+            <form id="signup-form" class="form">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function showForm(formType) {
+            // Update active tab
+            document.querySelectorAll('.form-toggle button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show the selected form
+            document.querySelectorAll('.form').forEach(form => {
+                form.classList.remove('active');
+            });
+            document.getElementById(formType + '-form').classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoulSpace Studio - Digital Art Creation Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #64748b;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --background: #0a0f1c;
+            --background-light: #0f172a;
+            --surface: #1e293b;
+            --surface-light: #334155;
+            --surface-lighter: #475569;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --border-light: #475569;
+            --glass: rgba(30, 41, 59, 0.8);
+            --glass-light: rgba(51, 65, 85, 0.6);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --radius: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll Animation Styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .zoom-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Professional Background System */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background: linear-gradient(135deg, #0a0f1c 0%, #1e293b 50%, #334155 100%);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            filter: blur(0.5px) brightness(0.7) contrast(1.1);
+            z-index: -9;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(10, 15, 28, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+            z-index: -8;
+        }
+
+        /* Animated Grid Pattern */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 120%;
+            height: 120%;
+            background-image: 
+                linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -7;
+            animation: gridFloat 30s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes gridFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(60px, 60px) rotate(0.5deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -6;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Professional Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(25px) saturate(200%);
+            box-shadow: var(--shadow-xl);
+            border-bottom-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4.5rem;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            background: rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            background: rgba(37, 99, 235, 0.15);
+            box-shadow: inset 0 1px 0 rgba(37, 99, 235, 0.2);
+        }
+
+        .theme-toggle {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.75rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--surface-light);
+            color: var(--text-primary);
+            transform: translateY(-1px) rotate(15deg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 1001;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+
+        /* Main Content */
+        .main {
+            padding-top: 4.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(3rem);
+            transition: var(--transition-slow);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section - Award Winning Design */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            color: var(--primary-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .hero-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(37, 99, 235, 0.5);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 50%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-2xl);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(15px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-light);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Professional Metrics Dashboard */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1s both;
+        }
+
+        .metric-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-2xl);
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        .metric-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Feature Cards - Premium Design */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 5rem;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            border-radius: var(--radius-2xl);
+            padding: 3rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            group: hover;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            transition: var(--transition);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Canvas Section - Professional Studio */
+        .canvas-section {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            border-radius: var(--radius-2xl);
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--text-primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: var(--radius-2xl);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .toolbar label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .toolbar input[type="range"] {
+            width: 140px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+            transition: var(--transition);
+        }
+
+        .toolbar input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .toolbar input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .toolbar input[type="color"] {
+            width: 3rem;
+            height: 3rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            background: none;
+            transition: var(--transition);
+        }
+
+        .toolbar input[type="color"]:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+
+        .toolbar button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .toolbar button:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        canvas {
+            background: white;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
+            cursor: crosshair;
+            transition: var(--transition);
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            display: block;
+            margin: 0 auto;
+        }
+
+        canvas:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Gallery - Premium Layout */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            group: hover;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item figcaption {
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Saved Works */
+        .saved-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .saved-item {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            border-radius: var(--radius-2xl);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .saved-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        .saved-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+        }
+
+        .saved-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .saved-actions button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .saved-actions button:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            transform: scale(1.1);
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 4rem;
+            height: 4rem;
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Professional Status Indicators */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-indicator.online {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-indicator::before {
+            content: '';
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(3rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 1rem;
+                height: 4rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .canvas-section {
+                padding: 2rem 1rem;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            canvas {
+                height: 300px;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .metric-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+        }
+
+        /* SVG Coloring */
+        .coloring-container {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: var(--radius-2xl);
+            backdrop-filter: blur(10px);
+        }
+
+        .color-swatch {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            border: 2px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .color-swatch.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        #coloring-svg {
+            background: white;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        #coloring-svg:hover {
+            box-shadow: var(--shadow-2xl);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Professional Background System -->
+    <div class="background-container">
+        <div class="background-overlay"></div>
+        <div class="grid-pattern"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">S</div>
+                SoulSpace Studio
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-link active">Home</a></li>
+                <li><a href="#paint" class="nav-link">Paint</a></li>
+                <li><a href="#mandala" class="nav-link">Mandala</a></li>
+                <li><a href="#coloring" class="nav-link">Coloring</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#saved" class="nav-link">Saved</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section - Award Winning Design -->
+        <section id="home" class="section hero">
+            <!-- Hero Video Background -->
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://videos.pexels.com/video-files/3273834/3273834-hd_1920_1080_30fps.mp4" type="video/mp4">
+            </video>
+            
+            <div class="container">
+                <div class="hero-content">
+                    
+                    <h1 class="hero-title">Create. Design. Inspire.</h1>
+                    <p class="hero-subtitle">
+                        Professional-grade digital art tools trusted by Fortune 500 companies and creative agencies worldwide. 
+                        Build stunning artwork with enterprise-level precision and creativity.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#paint" class="btn btn-primary">
+                            Start Creating
+                            <span>→</span>
+                        </a>
+                        <a href="#gallery" class="btn btn-secondary">
+                            View Gallery
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Professional Metrics Dashboard -->
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">50K+</div>
+                        <div class="metric-label">Artworks Created</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2.5K+</div>
+                        <div class="metric-label">Active Artists</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-label">Uptime</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">24/7</div>
+                        <div class="metric-label">Support</div>
+                    </div>
+                </div>
+
+                <!-- Feature Cards - Premium Design -->
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-title">Advanced Painting Engine</h3>
+                        <p class="feature-description">
+                            Professional brush engine with pressure sensitivity, 
+                            custom brushes, and advanced blending modes used by industry leaders.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌀</div>
+                        <h3 class="feature-title">Mandala Creator Pro</h3>
+                        <p class="feature-description">
+                            Create intricate mandala designs with symmetrical 
+                            drawing tools and customizable patterns for meditation and art therapy.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🖼️</div>
+                        <h3 class="feature-title">Interactive Coloring Studio</h3>
+                        <p class="feature-description">
+                            Professional coloring tools with vector graphics, 
+                            unlimited colors, and export capabilities for commercial use.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">☁️</div>
+                        <h3 class="feature-title">Enterprise Cloud Storage</h3>
+                        <p class="feature-description">
+                            Secure cloud storage for your artwork with 
+                            version control, collaboration features, and enterprise-grade security.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paint Section -->
+        <section id="paint" class="section">
+            <div class="container">
+                <div class="canvas-section">
+                    <h2 class="section-title">Digital Painting Studio</h2>
+                    <div class="toolbar" id="paint-toolbar">
+                        <label>
+                            <span>Brush Size</span>
+                            <input type="range" id="brush-size" min="2" max="40" value="8">
+                        </label>
+                        <input type="color" id="brush-color" value="#2563eb">
+                        <button id="clear-canvas">
+                            <span>🗑️</span>
+                            Clear
+                        </button>
+                        <button id="save-canvas">
+                            <span>💾</span>
+                            Save
+                        </button>
+                    </div>
+                    <canvas id="paint-canvas" width="800" height="500"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mandala Section -->
+        <section id="mandala" class="section">
+            <div class="container">
+                <div class="canvas-section">
+                    <h2 class="section-title">Mandala Creator Pro</h2>
+                    <div class="toolbar" id="mandala-toolbar">
+                        <label>
+                            <span>Symmetry</span>
+                            <input type="number" id="mandala-symmetry" min="2" max="24" value="8" style="width: 80px; padding: 0.75rem; border-radius: 0.75rem; border: 1px solid var(--border); background: var(--surface); color: var(--text-primary);">
+                        </label>
+                        <input type="color" id="mandala-color" value="#f59e0b">
+                        <button id="mandala-clear">
+                            <span>🗑️</span>
+                            Clear
+                        </button>
+                        <button id="mandala-save">
+                            <span>💾</span>
+                            Save
+                        </button>
+                    </div>
+                    <canvas id="mandala-canvas" width="800" height="500"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coloring Section -->
+        <section id="coloring" class="section">
+            <div class="container">
+                <div class="canvas-section">
+                    <h2 class="section-title">Interactive Coloring Studio</h2>
+                    <div class="coloring-container">
+                        <div class="color-palette" id="color-palette"></div>
+                        <div>
+                            <svg id="coloring-svg" viewBox="0 0 300 200" width="400" height="300">
+                                <!-- Default SVG will be loaded by JS -->
+                            </svg>
+                            <div class="toolbar">
+                                <button id="coloring-eraser">
+                                    <span>🧽</span>
+                                    Eraser
+                                </button>
+                                <button id="coloring-reset">
+                                    <span>🔄</span>
+                                    Reset
+                                </button>
+                                <button id="coloring-download">
+                                    <span>⬇️</span>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="container">
+                <div class="canvas-section">
+                    <h2 class="section-title">Professional Gallery</h2>
+                    <div class="gallery">
+                        <figure class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=300&fit=crop" alt="Abstract Art">
+                            <figcaption>Abstract Composition</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Digital Art">
+                            <figcaption>Digital Masterpiece</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&h=300&fit=crop" alt="Mandala Art">
+                            <figcaption>Sacred Geometry</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop" alt="Portrait Art">
+                            <figcaption>Portrait Study</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400&h=300&fit=crop" alt="Landscape Art">
+                            <figcaption>Landscape Vision</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400&h=300&fit=crop" alt="Modern Art">
+                            <figcaption>Contemporary Art</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Saved Works Section -->
+        <section id="saved" class="section">
+            <div class="container">
+                <div class="canvas-section">
+                    <h2 class="section-title">Your Creations</h2>
+                    <div class="saved-gallery" id="saved-gallery">
+                        <!-- Saved works will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Create Floating Particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particles.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Advanced Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Add staggered animation for child elements
+                    const children = entry.target.querySelectorAll('.feature-card, .metric-card, .gallery-item');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initialize child elements for staggered animation
+        document.querySelectorAll('.feature-card, .metric-card, .gallery-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(2rem)';
+            element.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+
+        // Smooth Scrolling with Enhanced Easing
+        document.querySelectorAll('.nav-link, .btn').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetSection = document.querySelector(href);
+                    if (targetSection) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active nav link
+                        document.querySelectorAll('.nav-link').forEach(navLink => {
+                            navLink.classList.remove('active');
+                        });
+                        if (link.classList.contains('nav-link')) {
+                            link.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Theme Toggle with Enhanced Animation
+        const themeToggle = document.getElementById('themeToggle');
+        let isDark = true; // Default to dark theme
+
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            const root = document.documentElement;
+            
+            if (isDark) {
+                root.style.setProperty('--background', '#0a0f1c');
+                root.style.setProperty('--surface', '#1e293b');
+                root.style.setProperty('--text-primary', '#f8fafc');
+                themeToggle.textContent = '🌙';
+            } else {
+                root.style.setProperty('--background', '#ffffff');
+                root.style.setProperty('--surface', '#f8fafc');
+                root.style.setProperty('--text-primary', '#0a0f1c');
+                themeToggle.textContent = '☀️';
+            }
+            
+            // Add rotation animation
+            themeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'rotate(0deg)';
+            }, 300);
+        });
+
+        // Paint Canvas with Enhanced Features
+        const paintCanvas = document.getElementById('paint-canvas');
+        const paintCtx = paintCanvas.getContext('2d');
+        let isPainting = false;
+        let brushSize = 8;
+        let brushColor = '#2563eb';
+
+        function startPainting(e) {
+            isPainting = true;
+            paint(e);
+        }
+
+        function stopPainting() {
+            isPainting = false;
+            paintCtx.beginPath();
+        }
+
+        function paint(e) {
+            if (!isPainting) return;
+            
+            const rect = paintCanvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+            
+            paintCtx.lineWidth = brushSize;
+            paintCtx.lineCap = 'round';
+            paintCtx.lineJoin = 'round';
+            paintCtx.strokeStyle = brushColor;
+            paintCtx.globalCompositeOperation = 'source-over';
+            paintCtx.lineTo(x, y);
+            paintCtx.stroke();
+            paintCtx.beginPath();
+            paintCtx.moveTo(x, y);
+        }
+
+        paintCanvas.addEventListener('mousedown', startPainting);
+        paintCanvas.addEventListener('mouseup', stopPainting);
+        paintCanvas.addEventListener('mousemove', paint);
+        paintCanvas.addEventListener('touchstart', startPainting);
+        paintCanvas.addEventListener('touchend', stopPainting);
+        paintCanvas.addEventListener('touchmove', paint);
+
+        document.getElementById('brush-size').addEventListener('input', (e) => {
+            brushSize = e.target.value;
+        });
+
+        document.getElementById('brush-color').addEventListener('input', (e) => {
+            brushColor = e.target.value;
+        });
+
+        document.getElementById('clear-canvas').addEventListener('click', () => {
+            paintCtx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+        });
+
+        document.getElementById('save-canvas').addEventListener('click', () => {
+            const dataURL = paintCanvas.toDataURL('image/png');
+            saveWork('paint', dataURL);
+            downloadImage(dataURL, 'painting.png');
+        });
+
+        // Mandala Canvas with Enhanced Symmetry
+        const mandalaCanvas = document.getElementById('mandala-canvas');
+        const mandalaCtx = mandalaCanvas.getContext('2d');
+        let isDrawingMandala = false;
+        let symmetry = 8;
+        let mandalaColor = '#f59e0b';
+        let lastPos = null;
+
+        function getMandalaPos(e) {
+            const rect = mandalaCanvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left - mandalaCanvas.width/2;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top - mandalaCanvas.height/2;
+            return { x, y };
+        }
+
+        function startMandala(e) {
+            isDrawingMandala = true;
+            lastPos = getMandalaPos(e);
+            drawMandala(e);
+        }
+
+        function stopMandala() {
+            isDrawingMandala = false;
+            lastPos = null;
+            mandalaCtx.beginPath();
+        }
+
+        function drawMandala(e) {
+            if (!isDrawingMandala) return;
+            
+            const pos = getMandalaPos(e);
+            
+            for (let i = 0; i < symmetry; i++) {
+                mandalaCtx.save();
+                mandalaCtx.translate(mandalaCanvas.width/2, mandalaCanvas.height/2);
+                mandalaCtx.rotate((2 * Math.PI * i) / symmetry);
+                mandalaCtx.strokeStyle = mandalaColor;
+                mandalaCtx.lineWidth = 3;
+                mandalaCtx.lineCap = 'round';
+                mandalaCtx.lineJoin = 'round';
+                mandalaCtx.beginPath();
+                mandalaCtx.moveTo(lastPos.x, lastPos.y);
+                mandalaCtx.lineTo(pos.x, pos.y);
+                mandalaCtx.stroke();
+                mandalaCtx.restore();
+            }
+            lastPos = pos;
+        }
+
+        mandalaCanvas.addEventListener('mousedown', startMandala);
+        mandalaCanvas.addEventListener('mouseup', stopMandala);
+        mandalaCanvas.addEventListener('mousemove', drawMandala);
+        mandalaCanvas.addEventListener('touchstart', startMandala);
+        mandalaCanvas.addEventListener('touchend', stopMandala);
+        mandalaCanvas.addEventListener('touchmove', drawMandala);
+
+        document.getElementById('mandala-symmetry').addEventListener('input', (e) => {
+            symmetry = Math.max(2, Math.min(24, parseInt(e.target.value)));
+        });
+
+        document.getElementById('mandala-color').addEventListener('input', (e) => {
+            mandalaColor = e.target.value;
+        });
+
+        document.getElementById('mandala-clear').addEventListener('click', () => {
+            mandalaCtx.clearRect(0, 0, mandalaCanvas.width, mandalaCanvas.height);
+        });
+
+        document.getElementById('mandala-save').addEventListener('click', () => {
+            const dataURL = mandalaCanvas.toDataURL('image/png');
+            saveWork('mandala', dataURL);
+            downloadImage(dataURL, 'mandala.png');
+        });
+
+        // Coloring Section with Enhanced Features
+        const coloringSvg = document.getElementById('coloring-svg');
+        const colorPalette = document.getElementById('color-palette');
+        let selectedColor = '#2563eb';
+
+        const colors = [
+            '#2563eb', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6', '#06b6d4',
+            '#84cc16', '#f97316', '#ec4899', '#6366f1', '#14b8a6', '#fbbf24',
+            '#1f2937', '#64748b', '#dc2626', '#059669', '#7c3aed', '#0ea5e9'
+        ];
+
+        // Create enhanced color palette
+        colors.forEach(color => {
+            const swatch = document.createElement('div');
+            swatch.className = 'color-swatch';
+            swatch.style.backgroundColor = color;
+            swatch.addEventListener('click', () => {
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                swatch.classList.add('selected');
+                selectedColor = color;
+            });
+            colorPalette.appendChild(swatch);
+        });
+
+        // Set first color as selected
+        colorPalette.firstChild.classList.add('selected');
+
+        // Load default SVG with enhanced graphics
+        const defaultSvg = `
+            <rect x="50" y="50" width="200" height="100" rx="20" stroke="#334155" stroke-width="3" fill="white"/>
+            <circle cx="100" cy="100" r="30" stroke="#334155" stroke-width="3" fill="white"/>
+            <circle cx="200" cy="100" r="30" stroke="#334155" stroke-width="3" fill="white"/>
+            <path d="M80 130 Q150 160 220 130" stroke="#334155" stroke-width="3" fill="none"/>
+        `;
+        coloringSvg.innerHTML = defaultSvg;
+
+        // Add enhanced click events to SVG elements
+        function setupColoringEvents() {
+            coloringSvg.querySelectorAll('rect, circle, ellipse, polygon, path').forEach(element => {
+                element.style.cursor = 'pointer';
+                element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                element.addEventListener('click', () => {
+                    element.setAttribute('fill', selectedColor);
+                });
+                element.addEventListener('mouseenter', () => {
+                    element.style.transform = 'scale(1.02)';
+                });
+                element.addEventListener('mouseleave', () => {
+                    element.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        setupColoringEvents();
+
+        document.getElementById('coloring-eraser').addEventListener('click', () => {
+            selectedColor = 'white';
+        });
+
+        document.getElementById('coloring-reset').addEventListener('click', () => {
+            coloringSvg.querySelectorAll('rect, circle, ellipse, polygon, path').forEach(element => {
+                element.setAttribute('fill', 'white');
+            });
+        });
+
+        document.getElementById('coloring-download').addEventListener('click', () => {
+            const svgData = new XMLSerializer().serializeToString(coloringSvg);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                downloadImage(canvas.toDataURL('image/png'), 'coloring.png');
+            };
+            
+            img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+        });
+
+        // Enhanced Utility Functions
+        function saveWork(type, dataURL) {
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            works.push({ type, dataURL, date: Date.now() });
+            localStorage.setItem('mypaint-works', JSON.stringify(works));
+            loadSavedWorks();
+            
+            // Show success notification
+            showNotification('Artwork saved successfully!', 'success');
+        }
+
+        function downloadImage(dataURL, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = dataURL;
+            link.click();
+            
+            // Show download notification
+            showNotification('Download started!', 'info');
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--glass);
+                backdrop-filter: blur(15px);
+                color: var(--text-primary);
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius-xl);
+                border: 1px solid var(--border);
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: var(--transition);
+                box-shadow: var(--shadow-xl);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        function loadSavedWorks() {
+            const gallery = document.getElementById('saved-gallery');
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            
+            gallery.innerHTML = '';
+            
+            if (works.length === 0) {
+                gallery.innerHTML = '<p style="text-align: center; color: var(--text-secondary); opacity: 0.7; font-size: 1.1rem;">No saved works yet. Create something amazing!</p>';
+                return;
+            }
+            
+            works.slice().reverse().forEach((work, index) => {
+                const item = document.createElement('div');
+                item.className = 'saved-item';
+                
+                item.innerHTML = `
+                    <img src="${work.dataURL}" alt="${work.type} artwork">
+                    <div class="saved-actions">
+                        <button onclick="downloadSavedWork(${works.length - 1 - index})" title="Download">⬇️</button>
+                        <button onclick="deleteSavedWork(${works.length - 1 - index})" title="Delete">🗑️</button>
+                    </div>
+                `;
+                
+                gallery.appendChild(item);
+            });
+        }
+
+        function downloadSavedWork(index) {
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            const work = works[index];
+            downloadImage(work.dataURL, `${work.type}-${work.date}.png`);
+        }
+
+        function deleteSavedWork(index) {
+            const works = JSON.parse(localStorage.getItem('mypaint-works') || '[]');
+            works.splice(index, 1);
+            localStorage.setItem('mypaint-works', JSON.stringify(works));
+            loadSavedWorks();
+            showNotification('Artwork deleted', 'info');
+        }
+
+        // Load saved works on page load
+        loadSavedWorks();
+
+        // Enhanced Touch Support
+        document.addEventListener('touchstart', (e) => {
+            if (e.target.tagName === 'CANVAS') {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            if (e.target.tagName === 'CANVAS') {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            if (e.target.tagName === 'CANVAS') {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Performance Optimization
+        let ticking = false;
+        function updateScrollEffects() {
+            // Batch scroll-based updates
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    // Update scroll progress
+                    const scrollProgress = document.getElementById('scrollProgress');
+                    const scrollTop = window.pageYOffset;
+                    const docHeight = document.body.offsetHeight - window.innerHeight;
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+                    scrollProgress.style.width = scrollPercent + '%';
+                    
+                    // Update header
+                    const header = document.getElementById('header');
+                    if (scrollTop > 100) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+
+
+        window.addEventListener('scroll', updateScrollEffects);
+    </script>
+</body>
+</html>

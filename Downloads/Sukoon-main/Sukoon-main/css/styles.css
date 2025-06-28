@@ -1,0 +1,129 @@
+
+* {
+  box-sizing: border-box;
+}
+
+
+*{
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+body{
+  background-image: url("../images/coming_soon_bg.png");
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  overflow: hidden;
+}
+p{
+  color: white;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 30px 0;
+}
+h1{
+  color: white;
+  margin: 20px 0;
+  width: 100%;
+  font-size: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+hr{
+  margin: 30px 0;
+  display:flex;
+  width: 700px;
+}
+#launch{
+  margin: 20px 0;
+  margin-left:20%;
+  font-size: 40px;
+} 
+
+h1 {
+  font-family: 'Itim',cursive;
+  color: white;
+  font-weight: normal;
+  font-size: 60px;
+  text-shadow: 2px 2px 4px #011120;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin: 20px 0;
+  width: 100%;
+  font-size: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+
+h3{
+  color: white;
+}
+h3 a{
+  color: white;
+  text-decoration: none;
+}
+
+h3 a:hover{
+  color: lightcyan;
+  text-shadow:0px 0px 10px blueviolet;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+h1:hover {
+  color: lightcyan;
+  text-shadow:0px 0px 20px blueviolet;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 45px;
+  }
+  .time {
+    margin: 5px;
+    padding: 0.1rem;
+  }
+  .time h2 {
+    font-size: 12px;
+  }
+  .text {
+    font-size: 10px;
+    box-shadow: 5px 5px 3px rgb(143, 143, 143);
+    padding: 0.1rem;
+    border-radius: 1px;
+  }
+  h3 {
+    color: white;
+    font-size: 1rem;
+    animation: typing 1s steps(12);
+  }
+}

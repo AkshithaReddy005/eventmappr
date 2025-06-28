@@ -1,0 +1,195 @@
+/* SoulSpace Wellness Carousel - Unique, Professional, On-Brand */
+.wellness-carousel-container {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: auto;
+  padding-bottom: 2.5rem;
+  margin-left: -4vw;
+  margin-right: -4vw;
+}
+.wellness-carousel {
+  display: flex;
+  flex-direction: row;
+  gap: 2.7em;
+  overflow-x: auto;
+  padding: 2.5rem 4vw 1.5rem 4vw;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-snap-type: none;
+  scroll-behavior: smooth;
+}
+.wellness-carousel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.wellness-carousel-card {
+  position: relative;
+  min-width: 320px;
+  max-width: 340px;
+  background: rgba(36, 46, 66, 0.94);
+  border-radius: 2.1em;
+  box-shadow: 0 2px 10px 0 rgba(36,46,66,0.10), 0 1.5px 12px 0 rgba(79,70,229,0.07);
+  border: 1.5px solid rgba(128,247,209,0.08);
+  color: #f5fafd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2.5em 1.7em 2.4em 1.7em;
+  margin-bottom: 1.2em;
+  transition: transform 0.22s, box-shadow 0.22s, border 0.22s;
+  backdrop-filter: blur(4px) saturate(1.07);
+  scroll-snap-align: center;
+  z-index: 1;
+}
+.wellness-carousel-card::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%; height: 110%;
+  border-radius: 2.3em;
+  background: none;
+  z-index: 0;
+}
+.wellness-carousel-card:hover, .wellness-carousel-card:focus {
+  outline: none;
+  box-shadow: 0 0 0 7px #80F7D1, 0 18px 54px rgba(128,247,209,0.16), 0 8px 40px rgba(0,0,0,0.18);
+  border: 2px solid #80F7D1;
+  transform: translateY(-10px) scale(1.035);
+}
+.wellness-card-icon-glass {
+  display: none;
+}
+.wellness-card-img-glass {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.1em;
+  margin-top: -2.5em;
+  z-index: 2;
+  border: 2.5px solid #e0e8ef;
+  background: #232d3b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2px 10px 0 rgba(36,46,66,0.07);
+}
+.wellness-card-img-glass img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.wellness-card-icon-glass .icon {
+  font-size: 2.3em;
+  color: #fff;
+  filter: drop-shadow(0 0 8px #80F7D1);
+}
+.wellness-carousel-card h2 {
+  font-size: 1.25em;
+  margin-bottom: 0.45em;
+  color: #80F7D1;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  z-index: 2;
+}
+.wellness-carousel-card p {
+  font-size: 1.08em;
+  color: #e6f8f3;
+  text-align: center;
+  margin-bottom: 2.2em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  z-index: 2;
+}
+.wellness-fab-btn {
+  position: absolute;
+  right: 1.6em;
+  bottom: 1.5em;
+  background: linear-gradient(90deg, #4f46e5 0%, #80F7D1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35em;
+  box-shadow: 0 2px 18px 0 rgba(128,247,209,0.15), 0 1.5px 12px 0 rgba(79,70,229,0.10);
+  cursor: pointer;
+  transition: background 0.22s, box-shadow 0.22s, transform 0.18s;
+  z-index: 3;
+  outline: none;
+  text-decoration: none;
+}
+.wellness-fab-btn:hover, .wellness-fab-btn:focus {
+  background: linear-gradient(90deg, #80F7D1 0%, #4f46e5 100%);
+  box-shadow: 0 4px 24px 0 rgba(128,247,209,0.21), 0 2px 20px 0 rgba(79,70,229,0.19);
+  transform: translateY(-2px) scale(1.08);
+  outline: 2px solid #80F7D1;
+}
+@media (max-width: 900px) {
+  .wellness-carousel {
+    gap: 1.1em;
+    padding: 2.2rem 2vw 1.2rem 2vw;
+  }
+  .wellness-carousel-card {
+    min-width: 85vw;
+    max-width: 95vw;
+    padding: 2em 1em 2em 1em;
+  }
+}
+@media (max-width: 600px) {
+  .wellness-carousel {
+    gap: 0.7em;
+    padding: 1.2rem 1vw 0.7rem 1vw;
+  }
+  .wellness-carousel-card {
+    min-width: 92vw;
+    max-width: 98vw;
+    padding: 1.2em 0.7em 1em 0.7em;
+  }
+  .wellness-carousel-nav {
+    display: none !important;
+  }
+}
+
+.wellness-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(36,46,66,0.93);
+  border: 1.5px solid #e0e8ef;
+  color: #80F7D1;
+  width: 2.7em;
+  height: 2.7em;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px 0 rgba(36,46,66,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  cursor: pointer;
+  transition: background 0.17s, color 0.17s, box-shadow 0.17s;
+  outline: none;
+  opacity: 0.92;
+  user-select: none;
+}
+.wellness-carousel-prev { left: 0.6vw; }
+.wellness-carousel-next { right: 0.6vw; }
+.wellness-carousel-nav:hover, .wellness-carousel-nav:focus {
+  background: #232d3b;
+  color: #4f46e5;
+  box-shadow: 0 4px 16px 0 rgba(79,70,229,0.13);
+  outline: 2px solid #80F7D1;
+}

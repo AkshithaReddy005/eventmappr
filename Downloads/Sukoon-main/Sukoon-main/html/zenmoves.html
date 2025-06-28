@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenMoves - SoulPlace | Advanced Yoga Therapy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --teal: #14b8a6;
+            --orange: #f97316;
+            --text-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --bg-light: #ffffff;
+            --bg-dark: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--bg-light);
+        }
+
+        /* Advanced Loader */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        .loader-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .lotus-loader {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: lotus-breathe 3s ease-in-out infinite;
+        }
+
+        .lotus-petal {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform-origin: center bottom;
+        }
+
+        .lotus-petal:nth-child(1) { transform: rotate(0deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite; }
+        .lotus-petal:nth-child(2) { transform: rotate(45deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite 0.25s; }
+        .lotus-petal:nth-child(3) { transform: rotate(90deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite 0.5s; }
+        .lotus-petal:nth-child(4) { transform: rotate(135deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite 0.75s; }
+        .lotus-petal:nth-child(5) { transform: rotate(180deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite 1s; }
+        .lotus-petal:nth-child(6) { transform: rotate(225deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite 1.25s; }
+        .lotus-petal:nth-child(7) { transform: rotate(270deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite 1.5s; }
+        .lotus-petal:nth-child(8) { transform: rotate(315deg) translateY(-30px); animation: petal-glow 2s ease-in-out infinite 1.75s; }
+
+        .lotus-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #ffd700, #ff6b6b);
+            border-radius: 50%;
+            animation: center-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes lotus-breathe {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        @keyframes petal-glow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes center-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.3); }
+        }
+
+        .loader-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            animation: text-glow 2s ease-in-out infinite;
+        }
+
+        .loader-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fade-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes text-glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255,255,255,0.5); }
+            50% { text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.6); }
+        }
+
+        @keyframes fade-pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 0.1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            position: relative;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logo-shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes logo-shimmer {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logo-shimmer 3s ease-in-out infinite;
+            color: var(--text-light);
+            background: linear-gradient(45deg, #6366f1, #a5b4fc, #f8fafc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            margin-bottom: 2rem;
+            color: #fbbf24;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            font-size: 3rem;
+        }
+
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { top: 30%; right: 30%; animation-delay: 1s; }
+        .floating-element:nth-child(5) { bottom: 40%; right: 10%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Breathing Exercise Widget */
+        .breathing-widget {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .breathing-widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .breathing-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .breathing-text {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .benefit-card {
+            background: var(--bg-light);
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .benefit-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+            font-size: 2rem;
+            animation: icon-float 3s ease-in-out infinite;
+        }
+
+        @keyframes icon-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .benefit-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        /* Asanas Section */
+        .asanas {
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .asanas .section-title {
+            color: var(--text-light);
+        }
+
+        .asanas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .asana-card {
+            perspective: 1000px;
+            height: 450px;
+        }
+
+        .asana-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .asana-card:hover .asana-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .asana-card-front,
+        .asana-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .asana-card-front {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(16, 185, 129, 0.9)),
+                        url('https://images.unsplash.com/photo-1588286840104-8957b019727f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: end;
+            padding: 2rem;
+        }
+
+        .asana-card-back {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            transform: rotateY(180deg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .asana-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .asana-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .asana-description {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .asana-benefits {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .asana-benefits li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .learn-more-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Meditation Timer Section */
+        .meditation-timer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .timer-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .timer-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timer-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .timer-presets {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preset-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Videos Section */
+        .videos {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .video-card {
+            background: var(--bg-light);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .play-button:hover {
+            background: white;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .video-content {
+            padding: 2rem;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .video-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .video-duration {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Progress Tracker */
+        .progress-tracker {
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .progress-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .progress-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle .progress-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 8;
+        }
+
+        .progress-circle .progress-fill {
+            fill: none;
+            stroke: var(--secondary);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dasharray 0.5s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0a0f1c 0%, #1e293b 100%);
+            color: var(--text-light);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .videos-grid,
+            .asanas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breathing-widget {
+                bottom: 1rem;
+                left: 1rem;
+                padding: 1rem;
+            }
+
+            .breathing-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            .timer-display {
+                font-size: 2.5rem;
+            }
+
+            .timer-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Smooth Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
+        }
+
+        /* Particle Animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particle-float 15s linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Advanced Loader -->
+    <div class="loader-container" id="loader">
+        <div class="loader-content">
+            <div class="lotus-loader">
+                <div class="lotus-petal"></div>
+                <div class="lotus-petal"></div>
+                <div class="lotus-petal"></div>
+                <div class="lotus-petal"></div>
+                <div class="lotus-petal"></div>
+                <div class="lotus-petal"></div>
+                <div class="lotus-petal"></div>
+                <div class="lotus-petal"></div>
+                <div class="lotus-center"></div>
+            </div>
+            <h2 class="loader-text">ZenMoves</h2>
+            <p class="loader-subtitle">SoulPlace</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">ZenMoves</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#asanas">Asanas</a></li>
+                <li><a href="#meditation">Meditation</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#progress">Progress</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breathing Exercise Widget -->
+    <div class="breathing-widget" id="breathingWidget">
+        <div class="breathing-circle">
+            <span id="breathingText">Breathe</span>
+        </div>
+        <div class="breathing-text">4-7-8 Technique</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <video class="hero-video" autoplay muted loop>
+            <source src="https://cdn.pixabay.com/video/2020/06/11/41724-430090688_large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="particles" id="particles"></div>
+        <div class="floating-element">🕉️</div>
+        <div class="floating-element">🧘‍♀️</div>
+        <div class="floating-element">🌸</div>
+        <div class="floating-element">🌿</div>
+        <div class="floating-element">✨</div>
+        
+        <div class="hero-content">
+            <h1>Transform Your Soul Through Yoga</h1>
+            <p class="hero-subtitle">SoulPlace</p>
+            <p>Discover inner peace, strength, and harmony through our comprehensive yoga therapy programs designed for your mind, body, and soul. Experience the ancient wisdom of yoga with modern therapeutic approaches.</p>
+            <div class="cta-buttons">
+                <a href="#benefits" class="cta-button primary">Start Your Journey</a>
+                <a href="#meditation" class="cta-button">Try Meditation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Transformative Benefits</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">🧘‍♀️</div>
+                    <h3>Stress Relief & Relaxation</h3>
+                    <p>Experience profound relaxation and stress reduction through mindful breathing, meditation, and gentle movements that calm your nervous system and restore inner peace.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Enhanced Flexibility & Strength</h3>
+                    <p>Build physical strength, improve flexibility, and enhance mobility with progressive yoga sequences that strengthen your core and increase your range of motion.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">🧠</div>
+                    <h3>Mental Clarity & Focus</h3>
+                    <p>Develop laser-sharp focus, concentration, and mental clarity through meditation and mindfulness practices that quiet mental chatter and enhance cognitive function.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">😴</div>
+                    <h3>Better Sleep Quality</h3>
+                    <p>Improve sleep quality and duration with specialized relaxation techniques and gentle evening practices that prepare your body and mind for restorative rest.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">❤️</div>
+                    <h3>Emotional Balance</h3>
+                    <p>Cultivate emotional stability, resilience, and inner harmony through practices that help you process emotions healthily and maintain psychological well-being.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Increased Energy & Vitality</h3>
+                    <p>Boost your energy levels, enhance vitality, and improve overall physical wellness through energizing yoga sequences and breathing techniques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Asanas Section -->
+    <section class="section asanas" id="asanas">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Essential Yoga Asanas</h2>
+            <div class="asanas-grid">
+                <div class="asana-card animate-on-scroll">
+                    <div class="asana-card-inner">
+                        <div class="asana-card-front">
+                            <div>
+                                <h3 class="asana-title">Warrior Pose</h3>
+                                <p class="asana-subtitle">Virabhadrasana</p>
+                            </div>
+                        </div>
+                        <div class="asana-card-back">
+                            <h3>Warrior Pose (Virabhadrasana)</h3>
+                            <p class="asana-description">Build strength, confidence, and stability with this powerful standing pose that engages your entire body while improving balance and focus.</p>
+                            <ul class="asana-benefits">
+                                <li>• Strengthens legs and core</li>
+                                <li>• Improves balance and stability</li>
+                                <li>• Builds confidence and courage</li>
+                                <li>• Enhances focus and concentration</li>
+                            </ul>
+                            <a href="#" class="learn-more-btn">Practice Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card animate-on-scroll">
+                    <div class="asana-card-inner">
+                        <div class="asana-card-front">
+                            <div>
+                                <h3 class="asana-title">Tree Pose</h3>
+                                <p class="asana-subtitle">Vrikshasana</p>
+                            </div>
+                        </div>
+                        <div class="asana-card-back">
+                            <h3>Tree Pose (Vrikshasana)</h3>
+                            <p class="asana-description">Enhance balance, concentration, and mental clarity with this grounding pose that connects you to the earth while strengthening your legs.</p>
+                            <ul class="asana-benefits">
+                                <li>• Improves balance and coordination</li>
+                                <li>• Strengthens legs and ankles</li>
+                                <li>• Enhances mental focus</li>
+                                <li>• Promotes inner calm</li>
+                            </ul>
+                            <a href="#" class="learn-more-btn">Practice Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card animate-on-scroll">
+                    <div class="asana-card-inner">
+                        <div class="asana-card-front">
+                            <div>
+                                <h3 class="asana-title">Child's Pose</h3>
+                                <p class="asana-subtitle">Balasana</p>
+                            </div>
+                        </div>
+                        <div class="asana-card-back">
+                            <h3>Child's Pose (Balasana)</h3>
+                            <p class="asana-description">Find deep relaxation and stress relief in this restorative pose that calms the mind and gently stretches the back and hips.</p>
+                            <ul class="asana-benefits">
+                                <li>• Relieves stress and anxiety</li>
+                                <li>• Stretches hips and back</li>
+                                <li>• Calms the nervous system</li>
+                                <li>• Promotes introspection</li>
+                            </ul>
+                            <a href="#" class="learn-more-btn">Practice Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card animate-on-scroll">
+                    <div class="asana-card-inner">
+                        <div class="asana-card-front">
+                            <div>
+                                <h3 class="asana-title">Downward Dog</h3>
+                                <p class="asana-subtitle">Adho Mukha Svanasana</p>
+                            </div>
+                        </div>
+                        <div class="asana-card-back">
+                            <h3>Downward Dog (Adho Mukha Svanasana)</h3>
+                            <p class="asana-description">Strengthen your entire body while improving flexibility and circulation in this foundational pose that energizes and revitalizes.</p>
+                            <ul class="asana-benefits">
+                                <li>• Full-body strengthening</li>
+                                <li>• Improves circulation</li>
+                                <li>• Stretches hamstrings and calves</li>
+                                <li>• Energizes the body</li>
+                            </ul>
+                            <a href="#" class="learn-more-btn">Practice Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card animate-on-scroll">
+                    <div class="asana-card-inner">
+                        <div class="asana-card-front">
+                            <div>
+                                <h3 class="asana-title">Lotus Pose</h3>
+                                <p class="asana-subtitle">Padmasana</p>
+                            </div>
+                        </div>
+                        <div class="asana-card-back">
+                            <h3>Lotus Pose (Padmasana)</h3>
+                            <p class="asana-description">Achieve deep meditation and inner peace in this classic seated pose that promotes mental clarity and spiritual awareness.</p>
+                            <ul class="asana-benefits">
+                                <li>• Perfect for meditation</li>
+                                <li>• Improves posture</li>
+                                <li>• Calms the mind</li>
+                                <li>• Enhances spiritual awareness</li>
+                            </ul>
+                            <a href="#" class="learn-more-btn">Practice Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="asana-card animate-on-scroll">
+                    <div class="asana-card-inner">
+                        <div class="asana-card-front">
+                            <div>
+                                <h3 class="asana-title">Cobra Pose</h3>
+                                <p class="asana-subtitle">Bhujangasana</p>
+                            </div>
+                        </div>
+                        <div class="asana-card-back">
+                            <h3>Cobra Pose (Bhujangasana)</h3>
+                            <p class="asana-description">Open your heart and strengthen your back with this backbend that improves posture and increases spine flexibility.</p>
+                            <ul class="asana-benefits">
+                                <li>• Strengthens back muscles</li>
+                                <li>• Opens chest and heart</li>
+                                <li>• Improves spinal flexibility</li>
+                                <li>• Boosts confidence</li>
+                            </ul>
+                            <a href="#" class="learn-more-btn">Practice Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meditation Timer Section -->
+    <section class="section meditation-timer" id="meditation">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Meditation Timer</h2>
+            <div class="timer-container animate-on-scroll">
+                <div class="timer-display" id="timerDisplay">05:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn" id="startBtn">Start</button>
+                    <button class="timer-btn" id="pauseBtn">Pause</button>
+                    <button class="timer-btn" id="resetBtn">Reset</button>
+                </div>
+                <div class="timer-presets">
+                    <button class="preset-btn" data-time="300">5 min</button>
+                    <button class="preset-btn" data-time="600">10 min</button>
+                    <button class="preset-btn" data-time="900">15 min</button>
+                    <button class="preset-btn" data-time="1200">20 min</button>
+                    <button class="preset-btn" data-time="1800">30 min</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section class="section videos" id="videos">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Guided Yoga Sessions</h2>
+            <div class="videos-grid">
+                <div class="video-card animate-on-scroll">
+                    <div class="video-thumbnail">
+                      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Stress Relief">
+                      <a href="https://youtu.be/BPRE9o1cEgk?feature=shared" class="play-button">▶</a>
+                    </div>
+                    <div class="video-content">
+                        <h3 class="video-title">Morning Energy Flow</h3>
+                        <p class="video-description">Start your day with this energizing 20-minute yoga sequence designed to awaken your body and mind with gentle stretches and invigorating poses.</p>
+                        <span class="video-duration">10 min</span>
+                    </div>
+                </div>
+                
+                <div class="video-card animate-on-scroll">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Stress Relief">
+                        <a href="https://youtu.be/tD_l3fDTFyg?feature=shared" class="play-button">▶</a>
+                    </div>
+                    <div class="video-content">
+                        <h3 class="video-title">Deep Stress Relief Practice</h3>
+                        <p class="video-description">Melt away tension and stress with this calming 30-minute restorative yoga session featuring gentle poses and breathing techniques.</p>
+                        <span class="video-duration">20 min</span>
+                    </div>
+                </div>
+                
+                <div class="video-card animate-on-scroll">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beginner Yoga">
+                        <a href="https://youtu.be/v7AYKMP6rOE?feature=shared" class="play-button">▶</a>
+                    </div>
+                    <div class="video-content">
+                        <h3 class="video-title">Beginner's Complete Journey</h3>
+                        <p class="video-description">Perfect for newcomers to yoga, this gentle 25-minute practice introduces basic poses, proper alignment, and breathing fundamentals.</p>
+                        <span class="video-duration">25 min</span>
+                    </div>
+                </div>
+                
+                <div class="video-card animate-on-scroll">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Evening Relaxation">
+                        <a href="https://youtu.be/BiWDsfZ3zbo?feature=shared" class="play-button">▶</a>
+                    </div>
+                    <div class="video-content">
+                        <h3 class="video-title">Evening Wind Down</h3>
+                        <p class="video-description">End your day peacefully with this relaxing 15-minute sequence designed for better sleep, recovery, and deep relaxation.</p>
+                        <span class="video-duration">15 min</span>
+                    </div>
+                </div>
+                
+                <div class="video-card animate-on-scroll">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Advanced Flow">
+                        <a href="https://youtu.be/OHNNfNHxapc?feature=shared" class="play-button">▶</a>
+                    </div>
+                    <div class="video-content">
+                        <h3 class="video-title">Advanced Power Flow</h3>
+                        <p class="video-description">Challenge yourself with this dynamic 45-minute power yoga sequence that builds strength, flexibility, and endurance.</p>
+                        <span class="video-duration">30 min</span>
+                    </div>
+                </div>
+                
+                <div class="video-card animate-on-scroll">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Meditation">
+                        <a href="https://youtu.be/xv-ejEOogaA?feature=shared" class="play-button">▶</a>
+                    </div>
+                    <div class="video-content">
+                        <h3 class="video-title">Guided Meditation Journey</h3>
+                        <p class="video-description">Experience deep inner peace with this 20-minute guided meditation featuring visualization techniques and mindfulness practices.</p>
+                        <span class="video-duration">10 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Tracker Section -->
+    <section class="section progress-tracker" id="progress">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Your Yoga Journey</h2>
+            <div class="progress-grid">
+                <div class="progress-card animate-on-scroll">
+                    <div class="progress-circle">
+                        <svg width="120" height="120">
+                            <circle class="progress-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="progress-fill" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="125"></circle>
+                        </svg>
+                        <div class="progress-text">60%</div>
+                    </div>
+                    <h3>Weekly Goal</h3>
+                    <p>3 out of 5 sessions completed this week</p>
+                </div>
+                
+                <div class="progress-card animate-on-scroll">
+                    <div class="progress-circle">
+                        <svg width="120" height="120">
+                            <circle class="progress-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="progress-fill" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="78"></circle>
+                        </svg>
+                        <div class="progress-text">75%</div>
+                    </div>
+                    <h3>Flexibility</h3>
+                    <p>Significant improvement in overall flexibility</p>
+                </div>
+                
+                <div class="progress-card animate-on-scroll">
+                    <div class="progress-circle">
+                        <svg width="120" height="120">
+                            <circle class="progress-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="progress-fill" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="94"></circle>
+                        </svg>
+                        <div class="progress-text">70%</div>
+                    </div>
+                    <h3>Mindfulness</h3>
+                    <p>Enhanced mental clarity and focus</p>
+                </div>
+                
+                <div class="progress-card animate-on-scroll">
+                    <div class="progress-circle">
+                        <svg width="120" height="120">
+                            <circle class="progress-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="progress-fill" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="47"></circle>
+                        </svg>
+                        <div class="progress-text">85%</div>
+                    </div>
+                    <h3>Strength</h3>
+                    <p>Notable increase in core and overall strength</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>ZenMoves</h3>
+                    <p>Transform your life through the ancient wisdom of yoga. Find your inner peace, build strength, and discover harmony in mind, body, and soul.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#asanas">Asanas</a></li>
+                        <li><a href="#meditation">Meditation</a></li>
+                        <li><a href="#videos">Videos</a></li>
+                        <li><a href="#progress">Progress</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Yoga Styles</h3>
+                    <ul>
+                        <li><a href="#">Hatha Yoga</a></li>
+                        <li><a href="#">Vinyasa Flow</a></li>
+                        <li><a href="#">Restorative Yoga</a></li>
+                        <li><a href="#">Power Yoga</a></li>
+                        <li><a href="#">Meditation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>gundupradeep2005@gmail.com</li>
+                        <li>Hyderabad, India</li>
+                        <li>Daily 6:00 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-text">
+                <p>&copy; 2024 ZenMoves - SoulPlace. All rights reserved. | Transforming lives through mindful movement and ancient wisdom.</p>
+                <p>Find your inner peace • Strengthen your body • Calm your mind • Awaken your soul</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">↑</button>
+
+    <script>
+        // Advanced Loading Screen
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                initializeParticles();
+            }, 3000);
+        });
+
+        // Particle System
+        function initializeParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                createParticle(particlesContainer);
+            }
+        }
+
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            container.appendChild(particle);
+
+            // Remove and recreate particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                    createParticle(container);
+                }
+            }, 15000);
+        }
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Breathing Exercise Widget
+        const breathingWidget = document.getElementById('breathingWidget');
+        const breathingText = document.getElementById('breathingText');
+        let breathingActive = false;
+        let breathingInterval;
+
+        breathingWidget.addEventListener('click', () => {
+            if (!breathingActive) {
+                startBreathingExercise();
+            } else {
+                stopBreathingExercise();
+            }
+        });
+
+        function startBreathingExercise() {
+            breathingActive = true;
+            let phase = 0; // 0: inhale, 1: hold, 2: exhale
+            let count = 0;
+
+            breathingInterval = setInterval(() => {
+                if (phase === 0) { // Inhale
+                    breathingText.textContent = `Inhale ${4 - count}`;
+                    count++;
+                    if (count > 4) {
+                        phase = 1;
+                        count = 0;
+                    }
+                } else if (phase === 1) { // Hold
+                    breathingText.textContent = `Hold ${7 - count}`;
+                    count++;
+                    if (count > 7) {
+                        phase = 2;
+                        count = 0;
+                    }
+                } else { // Exhale
+                    breathingText.textContent = `Exhale ${8 - count}`;
+                    count++;
+                    if (count > 8) {
+                        phase = 0;
+                        count = 0;
+                    }
+                }
+            }, 1000);
+        }
+
+        function stopBreathingExercise() {
+            breathingActive = false;
+            clearInterval(breathingInterval);
+            breathingText.textContent = 'Breathe';
+        }
+
+        // Meditation Timer
+        let timerInterval;
+        let timeLeft = 300; // 5 minutes default
+        let isRunning = false;
+
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                startBtn.textContent = 'Running...';
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        startBtn.textContent = 'Start';
+                        alert('Meditation session complete! 🧘‍♀️');
+                        timeLeft = 300;
+                        updateTimerDisplay();
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            if (isRunning) {
+                clearInterval(timerInterval);
+                isRunning = false;
+                startBtn.textContent = 'Resume';
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timeLeft = 300;
+            startBtn.textContent = 'Start';
+            updateTimerDisplay();
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Timer Presets
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!isRunning) {
+                    timeLeft = parseInt(btn.dataset.time);
+                    updateTimerDisplay();
+                }
+            });
+        });
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Enhanced Parallax Effect for Hero Section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // 3D Card Hover Effects Enhancement
+        document.querySelectorAll('.benefit-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+
+        // Initialize timer display
+        updateTimerDisplay();
+
+        // Dynamic greeting based on time
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            if (hour < 12) {
+                heroSubtitle.textContent = 'Good Morning - SoulPlace';
+            } else if (hour < 17) {
+                heroSubtitle.textContent = 'Good Afternoon -  SoulPlace';
+            } else {
+                heroSubtitle.textContent = 'Good Evening -  SoulPlace';
+            }
+        }
+
+        updateGreeting();
+
+        // Asana practice tracking
+        document.querySelectorAll('.learn-more-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const asanaCard = btn.closest('.asana-card');
+                const asanaTitle = asanaCard.querySelector('.asana-title').textContent;
+                
+                // Simulate practice tracking
+                alert(`Starting ${asanaTitle} practice!\n\nRemember to:\n• Focus on your breath\n• Listen to your body\n• Hold poses for 30-60 seconds\n• Practice mindfully`);
+                
+                // In a real app, this would track the practice session
+                console.log(`Practice started: ${asanaTitle}`);
+            });
+        });
+    </script>
+</body>
+</html>
